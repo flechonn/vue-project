@@ -2,6 +2,8 @@ import {createRouter, createWebHistory} from "vue-router"
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import MusiqueView from '../views/MusiqueView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
+
 
 const router = createRouter({
     history:createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +22,11 @@ const router = createRouter({
             path: "/musiques/:id",
             name: "musiques",
             component: MusiqueView
+        },
+        {
+            path:"/:pathmatch(.*)*",
+            name:"Nor Found",
+            component: NotFoundView
         }
     ]
 }) 

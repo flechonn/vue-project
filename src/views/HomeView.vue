@@ -27,12 +27,12 @@ const musiques = ref(musiqueData);
   <main class="container"> 
     <h1>Our Musiques </h1>
     <div class="musiques">
-        <!-- <div class="musique" v-for="musique in musiques" :key="musique.id" @click="route.push(`/musiques/${musiques.id}`)"> -->
-        <RouterLink :to="`/musiques/${musique.id}`" class="musique" v-for="musique in musiques" :key="musique.id">
+        <div class="musique" v-for="musique in musiques" :key="musique.id" @click="route.push(`/musiques/${musique.id}`)">
+        <!-- <RouterLink :to="`/musiques/${musique.id}`" class="musique" v-for="musique in musiques" :key="musique.id"> -->
           <h2>{{ musique.titre }}</h2>
           <p>{{ musique.auteur }}</p>
           <p>{{ musique.album }}</p>
-        </RouterLink>
+        </div>
     </div>
   </main>
 
