@@ -1,23 +1,10 @@
-<!-- <script setup>
-    const props =defineProps(['name','age']);
-</script>
-
-<template>
-    <h1>Home Page</h1>
-    <p>{{ props.name }}</p>
-    <p>
-    {{ props.age }}
-    </p>
-
-</template> -->
-
 <script setup>
 import { ref } from 'vue';
 import musiqueData from '../data.json';
 import { useRouter } from 'vue-router';
 import { RouterLink } from 'vue-router';
+import { likedTracks } from "../Likedtrack"
 const name =ref("nom");
-const age =ref("");
 const route=useRouter();
 const musiques = ref(musiqueData);
 
@@ -25,12 +12,12 @@ const musiques = ref(musiqueData);
 
 <template>
   <main class="container"> 
-    <h1>Our Musiques </h1>
+    <h1>Les albums </h1>
+    <h1>{{ likedTracks }}</h1>
     <div class="musiques">
-        <div class="musique" v-for="musique in musiques" :key="musique.id" @click="route.push(`/musiques/${musique.id}`)">
+        <div class="musique" v-for="musique in musiques" :key="musique.id" @click="route.push(`/album/${musique.album}`)">
         <!-- <RouterLink :to="`/musiques/${musique.id}`" class="musique" v-for="musique in musiques" :key="musique.id"> -->
-          <h2>{{ musique.titre }}</h2>
-          <p>{{ musique.auteur }}</p>
+          <h2>{{ musique.album }}</h2>
         </div>
     </div>
   </main>
@@ -61,3 +48,4 @@ const musiques = ref(musiqueData);
 
 
 </style>
+export const like = ref([]);

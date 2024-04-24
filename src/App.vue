@@ -10,6 +10,7 @@ import {ref} from 'vue'
     <div class="links">
       <RouterLink active-class="active" to="/">Home </RouterLink>
       <RouterLink active-class="active" to="/about">About</RouterLink>
+      <RouterLink active-class="active" to="/album">Album</RouterLink>
     </div>
     <!-- <h1>{{count}}</h1>
     <button @click="count++"> click</button> -->

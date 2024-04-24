@@ -17,7 +17,7 @@ onBeforeMount(() => {
 
 <template>
     <div class="container">
-        <div v-if="musique">
+        <div class="contan" v-if="musique">
             <h1>La musique</h1>
             <p>Auteur :{{ musique.auteur }}</p>
             <p>Titre :{{ musique.titre }}</p>
@@ -30,3 +30,14 @@ onBeforeMount(() => {
         
     </div>
 </template>
+
+<style scoped>
+.contan {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.207);
+  padding: 15px;
+  width:auto;
+  margin-right: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+</style>

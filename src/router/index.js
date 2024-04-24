@@ -2,7 +2,10 @@ import {createRouter, createWebHistory} from "vue-router"
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import MusiqueView from '../views/MusiqueView.vue'
+import AlbumView from '../views/AlbumView.vue'
+import SingleAlbumView from '../views/SingleAlbumView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
+
 
 
 const router = createRouter({
@@ -22,6 +25,16 @@ const router = createRouter({
             path: "/musiques/:id",
             name: "musiques",
             component: MusiqueView
+        },
+        {
+            path:"/album",
+            name:"album",
+            component: AlbumView
+        },
+        {
+            path:"/album/:album",
+            name:"singleAlbum",
+            component: SingleAlbumView
         },
         {
             path:"/:pathmatch(.*)*",
