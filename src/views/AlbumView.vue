@@ -11,9 +11,9 @@ const musiques = ref(musiqueData);
 </script>
 
 <template>
+  <h1>{{ likedTracks }}</h1>
   <main class="container"> 
     <h1>Les albums </h1>
-    <h1>{{ likedTracks }}</h1>
     <div class="musiques">
         <div class="musique" v-for="musique in musiques" :key="musique.id" @click="route.push(`/album/${musique.album}`)">
         <!-- <RouterLink :to="`/musiques/${musique.id}`" class="musique" v-for="musique in musiques" :key="musique.id"> -->

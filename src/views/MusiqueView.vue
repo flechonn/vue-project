@@ -5,6 +5,7 @@ import {onBeforeMount,ref} from "vue";
 import musik from "../data.json";
 
 const route = useRoute();
+const router = useRouter();
 const musique = ref(null);
 const {id} = route.params;
 console.log(route.params)
@@ -27,7 +28,7 @@ onBeforeMount(() => {
         <div v-else>
             <h1>musique inconnu</h1>
         </div>
-        
+        <button @click="router.back()">Go back</button>
     </div>
 </template>
 

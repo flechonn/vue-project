@@ -6,21 +6,32 @@ import { likedTracks } from "../Likedtrack"
 import musik from "../data.json";
 
 const route = useRoute();
+const router = useRouter()
 const musique = ref(null);
 const {album} = route.params;
 const isChecked = ref(false); 
 
+function isLike(){
+  if (likedTracks.value.includes(musique.value.titre)){
+    isChecked.value=true
+  }
+}
+
 onBeforeMount(() => {
    const c = musik.find(c => c.album ==album);
-   musique.value = c
+   musique.value = c;
+   isLike();
 });
+
+
 
 function toggleLike() {
   if (isChecked.value) {
-    // Si la case est cochée, ajouter le titre à la liste des titres aimés
-    likedTracks.value.push(musique.value.titre);
+    // Check if the music title is not already in the likedTracks array
+    if (!likedTracks.value.includes(musique.value.titre)) {
+      likedTracks.value.push(musique.value.titre);
+    }
   } else {
-    // Si la case est décochée, supprimer le titre de la liste des titres aimés
     const index = likedTracks.value.indexOf(musique.value.titre);
     if (index !== -1) {
       likedTracks.value.splice(index, 1);
@@ -28,9 +39,11 @@ function toggleLike() {
   }
 }
 
+
 </script>
 
 <template>
+    <h1>{{ likedTracks }}</h1>
     <div class="container">
         <div class="contan" v-if="musique">
             <h1>Album : "{{ musique.album }}" par  {{ musique.auteur }}</h1>
@@ -43,6 +56,7 @@ function toggleLike() {
                     <span v-else class="circle"></span>
                 </label>
             </div>
+            <button @click="router.back()">Go back</button>
         </div>
         <div v-else>
             <h1>musique inconnu</h1>
