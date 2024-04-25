@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import musiqueData from '../data.json';
 import { useRouter } from 'vue-router';
 import { RouterLink } from 'vue-router';
+import MusicCard from './MusicCard.vue';
 const router=useRouter();
 const musiques = ref(musiqueData);
 
@@ -12,11 +13,12 @@ const musiques = ref(musiqueData);
   <main class="container"> 
     <h1>Our Musiques </h1>
     <div class="musiques">
-        <div class="musique" v-for="musique in musiques" :key="musique.id" @click="router.push(`/musiques/${musique.id}`)">
+        <!-- <div class="musique" v-for="musique in musiques" :key="musique.id" @click="router.push(`/musiques/${musique.id}`)"> -->
         <!-- <RouterLink :to="`/musiques/${musique.id}`" class="musique" v-for="musique in musiques" :key="musique.id"> -->
-          <h2>{{ musique.titre }}</h2>
-          <p>{{ musique.auteur }}</p>
-        </div>
+          <!-- <h2>{{ musique.titre }}</h2> -->
+          <!-- <p>{{ musique.auteur }}</p> -->
+        <!-- </div> -->
+        <MusicCard v-for="musique in musiques" :key="musique.id" :musique="musique" />
     </div>
   </main>
 </template>
