@@ -9,8 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
+    "vite-express": "^0.16.0",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
