@@ -1,15 +1,23 @@
 import express from "express";
-import router from "./routes/post.routes.js";
-const app=express();
-const port=4000;
+import routerpost from "./routes/post.routes.js";
+import { readFileSync } from "fs";
 
-//midleware qui traite les données de la requeste
-app.use(express.json());
-// app.use(express.urlencoded()); // Setting extended option to true
-// app.use(cors());
+// Récupérer le chemin absolu du fichier data.json
+const dataFilePath = new URL("./data.json", import.meta.url).pathname;
 
+// Charger les données JSON de manière synchrone
+const data = JSON.parse(readFileSync(dataFilePath, "utf-8"));
 
-app.use("/post",router);
+const app = express();
+const port = 4000;
 
-//lance le server 
-app.listen(port,()=> console.log("le server à démarré au port " + port));
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+// Route pour envoyer les données
+app.get("/data", (req, res) => {
+    res.json(data);
+});
+
+app.use("/post", routerpost);
+
+app.listen(port, () => console.log("Le serveur a démarré au port " + port));

@@ -1,21 +1,23 @@
 import express from "express";
 import { getPosts, setPosts } from "../controllers/post.controllers.js";
 
-const router = express.Router();
+const routerpost = express.Router();
 
-router.get("/", getPosts);
-router.post("/", setPosts);
+routerpost.get("/", getPosts);
+routerpost.post("/", setPosts);
 
-router.put('/:id', (req, res) => {
+routerpost.put('/:id', (req, res) => {
+    console.log(req.body)
     res.json({ messageId: req.params.id });
 });
 
-router.delete('/:id', (req, res) => {
+routerpost.delete('/:id', (req, res) => {
+    console.log(req.body)
     res.json({ message: "Post supprimé id: " + req.params.id });
 });
 
-router.patch('/post-like/:id', (req, res) => {
+routerpost.patch('/post-like/:id', (req, res) => {
     res.json({ message: "Post liké : " + req.params.id });
 });
 
-export default router;
+export default routerpost;

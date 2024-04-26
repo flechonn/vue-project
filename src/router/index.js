@@ -5,6 +5,7 @@ import MusiqueView from '../views/MusiqueView.vue'
 import AlbumView from '../views/AlbumView.vue'
 import SingleAlbumView from '../views/SingleAlbumView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
+import DataView from '../views/DataView.vue'
 
 
 
@@ -32,6 +33,12 @@ const router = createRouter({
             component: AlbumView
         },
         {
+            path:"/data",
+            name:"data",
+            component: DataView
+
+        },
+        {
             path:"/album/:album",
             name:"singleAlbum",
             component: SingleAlbumView
@@ -40,7 +47,8 @@ const router = createRouter({
             path:"/:pathmatch(.*)*",
             name:"Nor Found",
             component: NotFoundView
-        }
+        },
+
     ]
 }) 
 
