@@ -1,10 +1,32 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue'
 import musiqueData from '../data.json';
 import { useRouter } from 'vue-router';
 import { RouterLink } from 'vue-router';
 const router=useRouter();
 const musiques = ref(musiqueData);
+
+const data = ref(null)
+
+async function loaddata(){
+  try {
+    const response = await fetch('http://localhost:4000/api/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
+    if (response.ok) {
+      data.value = await response.json(); // Parser le texte en JSON
+      console.log("HAGGRID")
+    } else {
+      console.error('Erreur1 lors de la récupération des données:', response.statusText)
+    }
+  } catch (error) {
+    console.error('Erreur2 lors de la récupération des données:', error)
+  }
+}
+
+
+onMounted(async () => {
+  loaddata()
+  console.log("Mounted")
+})
 
 </script>
 
@@ -17,6 +39,12 @@ const musiques = ref(musiqueData);
           <h2>{{ musique.titre }}</h2>
           <p>{{ musique.auteur }}</p>
         </div>
+    </div>
+    <div v-if="data">
+      <p v-for="(value, key) in data" :key="key">{{ value }}</p>
+    </div>
+    <div v-else>
+      <p>Chargement des données...</p>
     </div>
   </main>
 </template>

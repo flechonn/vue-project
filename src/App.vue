@@ -35,12 +35,6 @@ onMounted(async () => {
       <RouterLink active-class="active" to="/account">Account</RouterLink>
       <RouterLink active-class="active" to="/album">Album</RouterLink>
     </div>
-    <div v-if="data">
-      <p v-for="(value, key) in data" :key="key">{{ value }}</p>
-    </div>
-    <div v-else>
-      <p>Chargement des données...</p>
-    </div>
     <RouterView/>
   </main>
 </template>
