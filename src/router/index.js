@@ -33,15 +33,15 @@ const router = createRouter({
             component: AlbumView
         },
         {
+            path:"/album/:album",
+            name:"singleAlbum",
+            component: SingleAlbumView
+        },
+        {
             path:"/data",
             name:"data",
             component: DataView
 
-        },
-        {
-            path:"/album/:album",
-            name:"singleAlbum",
-            component: SingleAlbumView
         },
         {
             path:"/:pathmatch(.*)*",

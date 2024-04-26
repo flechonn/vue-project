@@ -5,7 +5,7 @@ const data = ref(null)
 
 async function loaddata(){
   try {
-    const response = await fetch('/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
+    const response = await fetch('/api/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
     if (response.ok) {
       console.log("hagrid")
       console.log("response"+response)
@@ -35,7 +35,7 @@ onMounted(async () => {
 
 <template>
   <main>
-    <h1>fbahjfahafklae</h1>
+    <h1>test</h1>
     fhkhfkfe
     <div v-if="data">
       <p v-for="(value, key) in data" :key="key">{{ value }}</p>

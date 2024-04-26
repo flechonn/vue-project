@@ -6,12 +6,10 @@ const data = ref(null)
 
 async function loaddata(){
   try {
-    const response = await fetch('/api/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
+    const response = await fetch('http://localhost:4000/api/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
     if (response.ok) {
-      const textData = await response.text(); // Obtenir le texte brut de la réponse
-      const cleanedTextData = textData.replace('export default ', ''); // Supprimer "export default"
-      console.log(cleanedTextData)
-      data.value = JSON.parse(textData); // Parser le texte en JSON
+      data.value = await response.json(); // Parser le texte en JSON
+      console.log("HAGGRID")
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
