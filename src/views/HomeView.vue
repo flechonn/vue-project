@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue'
 import musiqueData from '../data.json';
 import { useRouter } from 'vue-router';
+import MusiCard from './views/MusiCard.vue'
+
 import { RouterLink } from 'vue-router';
 const router=useRouter();
 const musiques = ref(musiqueData);
@@ -42,6 +44,7 @@ onMounted(async () => {
     </div>
     <div v-if="data">
       <p v-for="(value, key) in data" :key="key">{{ value }}</p>
+      <MusiCard></MusiCard>
     </div>
     <div v-else>
       <p>Chargement des données...</p>
