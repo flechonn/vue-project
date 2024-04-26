@@ -1,27 +1,28 @@
 import express from "express";
 import ViteExpress from "vite-express";
-import { readFileSync } from "fs";
+import { fileURLToPath } from 'url';
+import { dirname, join } from "path";
 
-
-const dataFilePath = new URL("./data.json", import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const dataFilePath = join(__dirname, "data.json");
 
 async function startServer() {
     const app = express();
+    const port = 4000;
 
-    const port=4000;
+    // Servir les fichiers statiques depuis le répertoire "public"
+    app.use(express.static("public"));
 
-    app.get("api/data", (req, res) => {
+    app.get("/api/data", (req, res) => {
         res.sendFile(dataFilePath);
-        });
-
-    app.get("api/test", (_, res) => {
-        // res.send("Hello from express!")
-        // res.send("incroyable")
-        res.json({message:"incroyable"})
-        console.log("here")
     });
 
-    ViteExpress.listen(app, port, () => console.log("Server is listening..." +port));
+    app.get("/api/test", (_, res) => {
+        res.json({ message: "incroyable" });
+    });
+
+    ViteExpress.listen(app, port, () => console.log("Server is listening on port " + port));
 }
 
 startServer();
