@@ -1,12 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import musiqueData from '../data.json';
 import { useRouter } from 'vue-router';
-import MusiCard from './views/MusiCard.vue'
-
+import MusiCard from './MusiCard.vue'
 import { RouterLink } from 'vue-router';
 const router=useRouter();
-const musiques = ref(musiqueData);
 
 const data = ref(null)
 
@@ -36,15 +33,13 @@ onMounted(async () => {
   <main class="container"> 
     <h1>Our Musiques </h1>
     <div class="musiques">
-        <div class="musique" v-for="musique in musiques" :key="musique.id" @click="router.push(`/musiques/${musique.id}`)">
-        <!-- <RouterLink :to="`/musiques/${musique.id}`" class="musique" v-for="musique in musiques" :key="musique.id"> -->
+        <!-- <div class="musique" v-for="musique in musiques" :key="musique.id" @click="router.push(`/musiques/${musique.id}`)">
           <h2>{{ musique.titre }}</h2>
           <p>{{ musique.auteur }}</p>
-        </div>
+        </div> -->
     </div>
     <div v-if="data">
-      <p v-for="(value, key) in data" :key="key">{{ value }}</p>
-      <MusiCard></MusiCard>
+      <MusiCard v-for="musique in data" :key="musique.id" :musique="musique" />
     </div>
     <div v-else>
       <p>Chargement des données...</p>
