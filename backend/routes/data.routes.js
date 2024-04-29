@@ -1,14 +1,9 @@
 import express from "express";
-import { readFileSync } from "fs";
+import { getData} from "../controllers/data.controllers.js";
 
 const routerdata = express.Router();
 
-const dataFilePath = new URL("../data.json", import.meta.url).pathname;
-const data = JSON.parse(readFileSync(dataFilePath, "utf-8"));
-routerdata.get("/", (req, res) => {
-    // res.sendFile(data);
-    res.json(data)
-});
+routerdata.get("/", getData);
 
 routerdata.put('/:id', (req, res) => {
     console.log(req.body)

@@ -26,29 +26,7 @@ onMounted(async () => {
 })
 
 async function addMusic() {
-  try {
-    console.log("coucou")
-    const response = await fetch('http://localhost:4000/api/post', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ 
-      "id": 2,
-      "titre": "Smells Like Teen Spirit",
-      "auteur": "Nirvana",
-      "duree": "5:01",
-      "album": "Nevermind"
-      })
-    });
-    if (response.ok) {
-      // Réussite
-    } else {
-      console.error('Erreur lors de l\'ajout de la musique:', response.statusText);
-    }
-  } catch (error) {
-    console.error('Erreur lors de l\'ajout de la musique:', error);
-  }
+
 }
 
 

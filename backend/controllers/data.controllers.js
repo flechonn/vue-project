@@ -1,3 +1,5 @@
+import { readFileSync } from "fs";
+
 export const setPosts = async (req, res) => {
     console.log(req.body)
     
@@ -12,6 +14,9 @@ export const setPosts = async (req, res) => {
     return res.status(200).json({ message: "Message posté avec succès", postedMessage: message });
 };
 
-export const getPosts = async (req, res) => {
-    res.status(200).json({ message: "Get fonctionne" });
+
+export const getData = async (req, res) => {
+    const dataFilePath = new URL("../data.json", import.meta.url).pathname;
+    const data = JSON.parse(readFileSync(dataFilePath, "utf-8"));
+    res.status(200).json(data);
 };
