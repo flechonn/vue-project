@@ -9,6 +9,8 @@ routerdata.post("/",setData);
 
 routerdata.delete('/:id', delData);
 
+routerdata.patch('/:id',patchData);
+
 
 routerdata.put('/:id', (req, res) => {
     console.log(req.body)
@@ -16,6 +18,5 @@ routerdata.put('/:id', (req, res) => {
 });
 
 
-routerdata.patch('/:id',patchData);
 
 export default routerdata;

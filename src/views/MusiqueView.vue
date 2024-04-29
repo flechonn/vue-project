@@ -1,14 +1,14 @@
 <script setup>
 import {useRoute, useRouter} from "vue-router";
-import {onBeforeMount,ref} from "vue";
-
-import musik from "../data.json";
+import {onBeforeMount,onMounted,ref} from "vue";
 
 const route = useRoute();
 const router = useRouter();
-const musique = ref(null);
 const {id} = route.params;
-console.log(route.params)
+const likedTracks=ref(null);
+const data=ref(null)
+const musique = ref(null);
+
 
 
 const isChecked = ref(false); 
@@ -18,6 +18,38 @@ function isLike(){
     isChecked.value=true
   }
 }
+
+async function loadliked(){
+  try {
+    const response = await fetch('http://localhost:4000/api/liked/')
+    if (response.ok) {
+      likedTracks.value = await response.json(); // Parser le texte en JSON
+    } else {
+      console.error('Erreur1 lors de la récupération des données:', response.statusText)
+    }
+  } catch (error) {
+    console.error('Erreur2 lors de la récupération des données:', error)
+  }
+}
+
+async function loaddata(){
+  try {
+    const response = await fetch('http://localhost:4000/api/data/') 
+    if (response.ok) {
+        // console.log(response.json())
+      data.value = await response.json(); // Parser le texte en JSON
+      console.log(data.value)
+
+      const c = data.value.find(c => c.id ===parseInt(id));
+      musique.value = c
+    } else {
+      console.error('Erreur1 lors de la récupération des données:', response.statusText)
+    }
+  } catch (error) {
+    console.error('Erreur2 lors de la récupération des données:', error)
+  }
+}
+
 function toggleLike() {
   if (isChecked.value) {
     // Check if the music title is not already in the likedTracks array
@@ -36,9 +68,16 @@ function EditMusic(){
     router.push(`/edit/${id}`);
 }
 
-onBeforeMount(() => {
-   const c = musik.find(c => c.id ===parseInt(id));
-   musique.value = c
+// onBeforeMount(async () => {
+//     loadliked()
+//     loaddata()
+//    const c = data.value.find(c => c.id ===parseInt(id));
+//    musique.value = c
+// });
+
+onBeforeMount(async () => {
+    loadliked()
+    loaddata()
 });
 </script>
 

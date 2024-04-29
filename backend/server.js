@@ -3,6 +3,8 @@ import ViteExpress from "vite-express";
 import cors from "cors"; 
 import routerpost from "./routes/post.routes.js";
 import routerdata from "./routes/data.routes.js";
+import routerliked from "./routes/liked.routes.js";
+
 
 
 async function startServer() {
@@ -13,9 +15,7 @@ async function startServer() {
 
     app.use(cors());
 
-    app.get("/test", (_, res) => {
-        res.json({ message: "incroyable" });
-    });
+    app.use("/liked", routerliked);
 
     app.use("/data",routerdata);
 
