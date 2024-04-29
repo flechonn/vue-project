@@ -5,3 +5,58 @@ export const getLiked = async (req, res) => {
     const data = JSON.parse(fs.readFileSync(dataFilePath, "utf-8"));
     res.status(200).json(data);
 };
+
+export const addliked = async (req, res) => {
+    const dataFilePath = new URL("../Likedtrack.json", import.meta.url).pathname;
+    console.log("Corps de la requête:", req.body);
+
+    try {
+        const { titre, auteur, duree, album } = req.body;
+        const newData = {
+            "idlike": -1,
+            "titre": titre,
+            "auteur": auteur,
+            "duree": duree,
+            "album": album
+        };
+
+        const existingData = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));
+        
+        const lastId = existingData.length > 0 ? existingData[existingData.length - 1].id : 0;
+        newData.id = lastId + 1;
+
+        existingData.push(newData);
+        fs.writeFileSync(dataFilePath, JSON.stringify(existingData, null, 2));
+        
+        return res.status(201).json({ message: "Musique ajoutée avec succès"  });
+    } catch (error) {
+        console.error('Erreur lors de l\'écriture des données dans le fichier:', error);
+        return res.status(500).json({ message: "Erreur lors de l'écriture des données dans le fichier" });
+    }
+}
+
+export const delLiked = async (req, res) => {
+    const dataFilePath = new URL("../Likedtrack.json", import.meta.url).pathname;
+
+    try {
+        const idToDelete = parseInt(req.params.id);
+        let existingData = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));
+        // Recherche de l'index de l'élément avec l'ID à supprimer
+        const indexToDelete = existingData.findIndex(item => item.id === idToDelete);
+        
+        if (indexToDelete !== -1) {
+            // Suppression de l'élément correspondant à l'ID
+            existingData.splice(indexToDelete, 1);
+            // Réécriture des données mises à jour dans le fichier
+            fs.writeFileSync(dataFilePath, JSON.stringify(existingData, null, 2));
+            
+            return res.status(200).json({ message: `Musique supprimée avec succès: ${idToDelete}` });
+        } else {
+            return res.status(404).json({ message: "Aucune musique trouvée avec cet ID" });
+        }
+    } catch (error) {
+        console.error('Erreur lors de la suppression des données dans le fichier:', error);
+        return res.status(500).json({ message: "Erreur lors de la suppression des données dans le fichier" });
+    }
+}
+

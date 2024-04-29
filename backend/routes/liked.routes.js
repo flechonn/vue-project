@@ -1,19 +1,13 @@
 import express from "express";
-import { getLiked } from "../controllers/liked.controllers.js";
+import { getLiked,addLiked,delLiked } from "../controllers/liked.controllers.js";
 
 const routerliked = express.Router();
 
 routerliked.get("/", getLiked);
 
-routerliked.put('/:id', (req, res) => {
-    console.log(req.body)
-    res.json({ messageId: req.params.id });
-});
+routerliked.post('/:id',addLiked);
 
-routerliked.delete('/:id', (req, res) => {
-    console.log(req.body)
-    res.json({ message: "Post supprimé id: " + req.params.id });
-});
+routerliked.delete('/:id',delLiked);
 
 
 export default routerliked;

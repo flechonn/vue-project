@@ -9,15 +9,7 @@ const likedTracks=ref(null);
 const data=ref(null)
 const musique = ref(null);
 
-
-
 const isChecked = ref(false); 
-
-function isLike(){
-  if (likedTracks.value.includes(musique.value.titre)){
-    isChecked.value=true
-  }
-}
 
 async function loadliked(){
   try {
@@ -50,17 +42,48 @@ async function loaddata(){
   }
 }
 
-function toggleLike() {
+async function addLiked() {
+  console.log("test addliked");
+  try {
+    const response = await fetch(`http://localhost:4000/liked/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(musique.value)
+    });
+    console.log("test addliked");
+    if (!response.ok) {
+      throw new Error('La requête n\'a pas abouti : ' + response.status);
+    }
+
+    console.log("Requête réussie!");
+    console.log("Réponse de l'API :", await response.json());
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi de la requête:', error);
+  }
+}
+
+async function delLiked() {
+  try {
+    const response = await fetch(`http://localhost:4000/api/data/${id}`, {
+      method: 'DELETE'
+    });
+    if (response.ok) {
+      console.log("Musique supprimée avec succès");
+    } else {
+      console.error('Erreur lors de la suppression de la musique:', response.statusText);
+    }
+    } catch (error) {
+    console.error('Erreur lors de la suppression de la musique:', error);
+  }
+}
+
+async function toggleLike() {
   if (isChecked.value) {
-    // Check if the music title is not already in the likedTracks array
-    if (!likedTracks.value.includes(musique.value.titre)) {
-      likedTracks.value.push(musique.value.titre);
-    }
+    addLiked()
   } else {
-    const index = likedTracks.value.indexOf(musique.value.titre);
-    if (index !== -1) {
-      likedTracks.value.splice(index, 1);
-    }
+    delLiked()
   }
 }
 
