@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import MusiCard from './MusiCard.vue'
 
+
 const router=useRouter();
 const data = ref(null)
 const idToDelete =ref(null)
@@ -25,25 +26,7 @@ onMounted(async () => {
 })
 
 async function addMusic() {
-  try {
-    const response = await fetch('http://localhost:4000/api/data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: ""
-    });
-    
-    if (response.ok) {
-      // Recharger les données après l'ajout réussi
-      await loaddata();
-      console.log("Musique ajoutée avec succès");
-    } else {
-      console.error('Erreur lors de l\'ajout de la musique:', response.statusText);
-    }
-  } catch (error) {
-    console.error('Erreur lors de l\'ajout de la musique:', error);
-  }
+  router.push(`addMusic`);
 }
 
 async function deleteMusic(id) {
@@ -63,9 +46,6 @@ async function deleteMusic(id) {
     console.error('Erreur lors de la suppression de la musique:', error);
   }
 }
-
-
-
 </script>
 
 
@@ -87,8 +67,6 @@ async function deleteMusic(id) {
 </template>
 
 <style scoped>
-
-
 .container {
   height: 100vh;
   display: flex;
@@ -100,7 +78,4 @@ async function deleteMusic(id) {
   display: flex;
   flex-direction: row; /* Pour afficher en ligne */
 }
-
-
-
 </style>
