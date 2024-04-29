@@ -6,6 +6,8 @@ import AlbumView from '../views/AlbumView.vue'
 import SingleAlbumView from '../views/SingleAlbumView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import addMusicView from '../views/addMusicView.vue'
+import EditMusicView from '../views/EditMusicView.vue'
+
 
 
 
@@ -41,6 +43,12 @@ const router = createRouter({
             path:"/addMusic",
             name:"addMusic",
             component: addMusicView
+
+        },
+        {
+            path:"/edit/:id",
+            name:"edit",
+            component: EditMusicView
 
         },
         {

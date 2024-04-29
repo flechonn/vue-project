@@ -32,6 +32,10 @@ function toggleLike() {
   }
 }
 
+function EditMusic(){
+    router.push(`/edit/${id}`);
+}
+
 onBeforeMount(() => {
    const c = musik.find(c => c.id ===parseInt(id));
    musique.value = c
@@ -50,6 +54,7 @@ onBeforeMount(() => {
         <div v-else>
             <h1>musique inconnu</h1>
         </div>
+        <button @click="EditMusic()">EditMusic</button>
         <div>
             <input type="checkbox" id="heartCheckbox" v-model="isChecked" @change="toggleLike" />
             <label for="heartCheckbox" class="heart-label">

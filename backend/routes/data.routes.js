@@ -1,5 +1,5 @@
 import express from "express";
-import { getData,setData,delData } from "../controllers/data.controllers.js";
+import { getData,setData,delData,patchData } from "../controllers/data.controllers.js";
 
 const routerdata = express.Router();
 
@@ -16,8 +16,6 @@ routerdata.put('/:id', (req, res) => {
 });
 
 
-routerdata.patch('/post-like/:id', (req, res) => {
-    res.json({ message: "Post liké : " + req.params.id });
-});
+routerdata.patch('/:id',patchData);
 
 export default routerdata;

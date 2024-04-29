@@ -5,10 +5,6 @@ import {useRouter} from "vue-router";
 
 const router = useRouter();
 
-onMounted(async () => {
-  console.log("teste")
-})
-
 const newMusic = ref({
   titre: '',
   auteur: '',
