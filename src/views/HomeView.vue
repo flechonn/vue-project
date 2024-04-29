@@ -2,16 +2,16 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import MusiCard from './MusiCard.vue'
-const router=useRouter();
 
+const router=useRouter();
 const data = ref(null)
+const idToDelete =ref(null)
 
 async function loaddata(){
   try {
     const response = await fetch('http://localhost:4000/api/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
     if (response.ok) {
       data.value = await response.json(); // Parser le texte en JSON
-      console.log("HAGGRID")
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
@@ -22,17 +22,48 @@ async function loaddata(){
 
 onMounted(async () => {
   loaddata()
-  console.log("Mounted")
 })
 
 async function addMusic() {
-
+  try {
+    const response = await fetch('http://localhost:4000/api/data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: ""
+    });
+    
+    if (response.ok) {
+      // Recharger les données après l'ajout réussi
+      await loaddata();
+      console.log("Musique ajoutée avec succès");
+    } else {
+      console.error('Erreur lors de l\'ajout de la musique:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la musique:', error);
+  }
 }
 
-
-function deleteMusic() {
-  // Logique pour supprimer une musique
+async function deleteMusic(id) {
+  try {
+    const response = await fetch(`http://localhost:4000/api/data/${id}`, {
+      method: 'DELETE'
+    });
+    
+    if (response.ok) {
+      // Recharger les données après la suppression réussie
+      await loaddata();
+      console.log("Musique supprimée avec succès");
+    } else {
+      console.error('Erreur lors de la suppression de la musique:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la musique:', error);
+  }
 }
+
 
 
 </script>
@@ -48,8 +79,9 @@ function deleteMusic() {
       <p>Chargement des données...</p>
     </div>
     <div class="buttons">
-      <button @click="addMusic">Ajouter</button>
-      <button @click="deleteMusic">Supprimer</button>
+      <button @click="addMusic">AddMusic</button>
+      <input type="text" v-model="idToDelete" placeholder="Entrez l'ID à supprimer">
+      <button @click="deleteMusic(idToDelete)">DelMusic</button>
     </div>
   </main>
 </template>

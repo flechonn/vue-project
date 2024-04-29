@@ -15,7 +15,8 @@ function goToMusicDetail() {
 
 <template>
   <div class="musique" @click="goToMusicDetail">
-    <h1>Auteur :{{ musique.auteur }}</h1>
+    <h1>Id :{{ musique.id }}</h1>
+    <p>Auteur :{{ musique.auteur }}</p>
     <p>Titre :{{ musique.titre }}</p>
     <p>Durée :{{ musique.duree }}</p>
     <p>Album :{{ musique.album }}</p>
