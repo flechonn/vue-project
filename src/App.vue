@@ -9,7 +9,6 @@ async function loaddata(){
     const response = await fetch('http://localhost:4000/api/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
     if (response.ok) {
       data.value = await response.json(); // Parser le texte en JSON
-      console.log("HAGGRID")
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
@@ -21,7 +20,6 @@ async function loaddata(){
 
 onMounted(async () => {
   loaddata()
-  console.log("Mounted")
 })
 
 

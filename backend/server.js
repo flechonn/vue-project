@@ -1,5 +1,6 @@
 import express from "express";
 import ViteExpress from "vite-express";
+import cors from "cors"; 
 import routerpost from "./routes/post.routes.js";
 import routerdata from "./routes/data.routes.js";
 
@@ -7,6 +8,10 @@ import routerdata from "./routes/data.routes.js";
 async function startServer() {
     const app = express();
     const port = 4000;
+
+    app.use(express.json())
+
+    app.use(cors());
 
     app.get("/test", (_, res) => {
         res.json({ message: "incroyable" });

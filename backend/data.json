@@ -61,12 +61,5 @@
     "auteur": "Jimi Hendrix",
     "duree": "2:50",
     "album": "Are You Experienced"
-  },
-  {
-    "id": 10,
-    "titre": "Smells Like Teen Spirit",
-    "auteur": "Nirvana",
-    "duree": "5:01",
-    "album": "Nevermind"
   }
 ]

@@ -8,6 +8,10 @@ export default defineConfig({
     vue(),
   ],
   server: {
+    // cors:{
+    //   origin:"http://localhost:5173",
+    //   methods:["POST","GET"]
+    // },
     proxy: {
       '/api': {
         target: 'http://localhost:4000', // Remplacez cela par l'URL de votre serveur Express

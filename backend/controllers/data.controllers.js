@@ -3,17 +3,20 @@ import fs from 'fs';
 //'/'
 export const setData = async (req, res) => {
     const dataFilePath = new URL("../data.json", import.meta.url).pathname;
+    console.log("Corps de la requête:", req.body);
 
     try {
+        
+        const { titre, auteur, duree, album } = req.body;
+
         const newData = {
             "id": -1,
-             //à récupérer depuis le post
-            "titre": "Imagine",
-            "auteur": "John Lennon",
-            "duree": "3:02",
-            "album": "Imagine"
+            "titre": titre,
+            "auteur": auteur,
+            "duree": duree,
+            "album": album
         };
-        // Lecture du fichier existant
+
         const existingData = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));
         
         const lastId = existingData.length > 0 ? existingData[existingData.length - 1].id : 0;
@@ -22,7 +25,7 @@ export const setData = async (req, res) => {
         existingData.push(newData);
         fs.writeFileSync(dataFilePath, JSON.stringify(existingData, null, 2));
         
-        return res.status(200).json({ message: "Musique ajoutée avec succès" });
+        return res.status(201).json({ message: "Musique ajoutée avec succès"  });
     } catch (error) {
         console.error('Erreur lors de l\'écriture des données dans le fichier:', error);
         return res.status(500).json({ message: "Erreur lors de l'écriture des données dans le fichier" });

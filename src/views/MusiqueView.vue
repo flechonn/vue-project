@@ -10,6 +10,28 @@ const musique = ref(null);
 const {id} = route.params;
 console.log(route.params)
 
+
+const isChecked = ref(false); 
+
+function isLike(){
+  if (likedTracks.value.includes(musique.value.titre)){
+    isChecked.value=true
+  }
+}
+function toggleLike() {
+  if (isChecked.value) {
+    // Check if the music title is not already in the likedTracks array
+    if (!likedTracks.value.includes(musique.value.titre)) {
+      likedTracks.value.push(musique.value.titre);
+    }
+  } else {
+    const index = likedTracks.value.indexOf(musique.value.titre);
+    if (index !== -1) {
+      likedTracks.value.splice(index, 1);
+    }
+  }
+}
+
 onBeforeMount(() => {
    const c = musik.find(c => c.id ===parseInt(id));
    musique.value = c
@@ -28,6 +50,13 @@ onBeforeMount(() => {
         <div v-else>
             <h1>musique inconnu</h1>
         </div>
+        <div>
+            <input type="checkbox" id="heartCheckbox" v-model="isChecked" @change="toggleLike" />
+            <label for="heartCheckbox" class="heart-label">
+                <span v-if="isChecked" class="heart">❤️</span>
+                <span v-else class="circle"></span>
+            </label>
+            </div>
         <button @click="router.back()">Go back</button>
     </div>
 </template>
@@ -40,5 +69,26 @@ onBeforeMount(() => {
   margin-right: 15px;
   cursor: pointer;
   margin-bottom: 20px;
+}
+
+.heart-label {
+  cursor: pointer;
+}
+
+.heart {
+  font-size: 24px; /* Taille du cœur */
+}
+
+.circle {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: #000; /* Couleur du cercle */
+  border-radius: 50%; /* Pour former un cercle */
+}
+
+/* Style de la case à cocher */
+#heartCheckbox {
+  display: none; /* Cacher la case à cocher */
 }
 </style>
