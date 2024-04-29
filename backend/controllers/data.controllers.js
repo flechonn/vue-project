@@ -13,7 +13,6 @@ export const setData = async (req, res) => {
             "duree": "3:02",
             "album": "Imagine"
         };
-
         // Lecture du fichier existant
         const existingData = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));
         
@@ -36,17 +35,14 @@ export const delData = async (req, res) => {
     const dataFilePath = new URL("../data.json", import.meta.url).pathname;
 
     try {
-        const idToDelete = parseInt(req.params.id); // Convertir l'ID en entier
-        // Lecture du fichier existant
+        const idToDelete = parseInt(req.params.id);
         let existingData = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));
-        
         // Recherche de l'index de l'élément avec l'ID à supprimer
         const indexToDelete = existingData.findIndex(item => item.id === idToDelete);
         
         if (indexToDelete !== -1) {
             // Suppression de l'élément correspondant à l'ID
             existingData.splice(indexToDelete, 1);
-
             // Réécriture des données mises à jour dans le fichier
             fs.writeFileSync(dataFilePath, JSON.stringify(existingData, null, 2));
             
@@ -64,6 +60,6 @@ export const delData = async (req, res) => {
 
 export const getData = async (req, res) => {
     const dataFilePath = new URL("../data.json", import.meta.url).pathname;
-    const data = JSON.parse(readFileSync(dataFilePath, "utf-8"));
+    const data = JSON.parse(fs.readFileSync(dataFilePath, "utf-8"));
     res.status(200).json(data);
 };
