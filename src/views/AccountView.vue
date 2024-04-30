@@ -1,7 +1,7 @@
 <script setup>
 import {onBeforeMount,ref} from "vue";
-import MusiCard from './MusiCard.vue'
-import Playlist from './Playlist.vue'; // Importez votre composant Playlist
+import MusiCard from './musicview/MusiCard.vue'
+import Playlist from './playlistview/Playlist.vue'; // Importez votre composant Playlist
 
 const likedTracks=ref(null)
 const playlists=ref(null)

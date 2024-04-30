@@ -4,8 +4,6 @@ export const LikedFilePath = new URL("../Likedtrack.json", import.meta.url).path
 export const DataFilePath = new URL("../data.json", import.meta.url).pathname;
 export const PlaylistFilePath = new URL("../playlist.json", import.meta.url).pathname;
 
-
-
 export const deleteData = async (filePath, idToDelete) => {
     try {
         let existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
@@ -27,7 +25,6 @@ export const deleteData = async (filePath, idToDelete) => {
     }
 }
 
-// common.controllers.js
 export const postData = async (filePath, req, res, generateNewId) => {
     console.log("Corps de la requête:", req.body);
 
@@ -56,3 +53,23 @@ export const postData = async (filePath, req, res, generateNewId) => {
         return res.status(500).json({ message: "Erreur lors de l'écriture des données dans le fichier" });
     }
 }
+
+export const patchData = async (filePath, req, res) => {
+    try {
+        const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        console.log("Params de la requête:", req.params);
+        const index = data.findIndex(item => item.id === parseInt(req.params.id));
+        // Vérification si l'élément existe
+        if (index === -1) {
+            return res.status(404).json({ message: "L'élément n'a pas été trouvé." });
+        }
+        data[index] = { ...data[index], ...req.body };
+
+        // Écriture des données mises à jour dans le fichier JSON
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+        res.status(200).json({ message: "Données mises à jour avec succès.", updatedData: data[index] });
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour des données :", error);
+        res.status(500).json({ message: "Erreur lors de la mise à jour des données." });
+    }
+};

@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { deleteData,postData,DataFilePath,LikedFilePath } from './common.controllers.js';
+import { deleteData,postData,patchData,DataFilePath,LikedFilePath } from './common.controllers.js';
 
 
 export const delData = async (req, res) => {
@@ -28,24 +28,8 @@ export const getData = async (req, res) => {
     res.status(200).json(data);
 };
 
-export const patchData = async (req, res) => {
-    console.log("Corps de la requête:", req.body);
-    try {
-        const data = JSON.parse(fs.readFileSync(DataFilePath, "utf-8"));
-        console.log("prams de la requête:", req.params);
-        const index = data.findIndex(item => item.id === parseInt(req.params.id));
-        // Vérification si l'élément existe
-        if (index === -1) {
-            return res.status(404).json({ message: "L'élément n'a pas été trouvé." });
-        }
-        data[index] = { ...data[index], ...req.body };
-
-        // Écriture des données mises à jour dans le fichier JSON
-        fs.writeFileSync(DataFilePath, JSON.stringify(data, null, 2));
-        res.status(200).json({ message: "Données mises à jour avec succès.", updatedData: data[index] });
-    } catch (error) {
-        console.error("Erreur lors de la mise à jour des données :", error);
-        res.status(500).json({ message: "Erreur lors de la mise à jour des données." });
-    }
+export const editData = async (req, res) => {
+    await patchData(DataFilePath,req,res);
 };
+
 

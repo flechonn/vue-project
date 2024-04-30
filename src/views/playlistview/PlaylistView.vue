@@ -1,7 +1,7 @@
 <script setup>
 import {useRoute, useRouter} from "vue-router";
 import {onBeforeMount,onMounted,ref} from "vue";
-import MusiCard from './MusiCard.vue'
+import MusiCard from '../musicview/MusiCard.vue'
 
 
 const route = useRoute();
@@ -26,6 +26,10 @@ async function loadplaylist(){
   }
 }
 
+function EditPlaylist(){
+  router.push(`/edit-playlist/${id}`);
+}
+
 onBeforeMount(async () => {
     loadplaylist()
 });
@@ -39,6 +43,7 @@ onBeforeMount(async () => {
       <div class="flex-container" v-if="laplaylist">
         <MusiCard v-for="track in laplaylist.tracks" :key="track.id" :musique="track"/>
       </div>
+    <button @click="EditPlaylist()">EditPlaylist</button>
     <button @click="router.back()">Go back</button>
 </template>
   

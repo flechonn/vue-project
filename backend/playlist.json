@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Classic Rock",
-    "description": "A collection of classic rock songs.",
+    "description": "A collection of classic rock songs. Bangers",
     "tracks": [
       {
         "id": 1,
@@ -93,14 +93,14 @@
   {
     "id": 4,
     "name": "techno",
-    "description": "Playlist for caisson.",
+    "description": "Playlist for Polytech.",
     "tracks": [
       {
-        "id": 10,
-        "titre": "On the Floor",
-        "auteur": "Shakira",
-        "duree": "2:56",
-        "album": "hardstyle"
+        "id": 3,
+        "titre": "Hotel California",
+        "auteur": "Eagles",
+        "duree": "6:30",
+        "album": "Hotel California"
       }
     ]
   }

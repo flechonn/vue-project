@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { deleteData,PlaylistFilePath,postData } from './common.controllers.js';
+import { patchData,postData,deleteData,PlaylistFilePath } from './common.controllers.js';
 
 export const delPlaylist = async (req, res) => {
     try {
@@ -25,5 +25,7 @@ export const addPlaylist = async (req, res) => {
     await postData(PlaylistFilePath, req, res, false);
 }
 
-
+export const editPlaylist = async (req, res) => {
+    await patchData(PlaylistFilePath,req,res);
+};
 

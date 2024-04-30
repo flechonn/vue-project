@@ -1,5 +1,5 @@
 import express from "express";
-import { getData,setData,delData,patchData } from "../controllers/data.controllers.js";
+import { getData,setData,delData,editData } from "../controllers/data.controllers.js";
 
 const routerdata = express.Router();
 
@@ -9,7 +9,7 @@ routerdata.post("/",setData);
 
 routerdata.delete('/:id', delData);
 
-routerdata.patch('/:id',patchData);
+routerdata.patch('/:id',editData);
 
 
 routerdata.put('/:id', (req, res) => {

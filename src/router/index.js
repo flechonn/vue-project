@@ -1,13 +1,16 @@
 import {createRouter, createWebHistory} from "vue-router"
 import HomeView from '../views/HomeView.vue'
 import AccountView from '../views/AccountView.vue'
-import MusiqueView from '../views/MusiqueView.vue'
+import MusiqueView from '../views/musicview/MusiqueView.vue'
 import AlbumView from '../views/AlbumView.vue'
 import SingleAlbumView from '../views/SingleAlbumView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
-import addMusicView from '../views/addMusicView.vue'
-import EditMusicView from '../views/EditMusicView.vue'
-import PlaylistView from '../views/PlaylistView.vue'
+import addMusicView from '../views/musicview/addMusicView.vue'
+import EditMusicView from '../views/musicview/EditMusicView.vue'
+import PlaylistView from '../views/playlistview/PlaylistView.vue'
+import EditPlaylistView from '../views/playlistview/EditPlaylistView.vue'
+
+
 
 
 const router = createRouter({
@@ -50,12 +53,15 @@ const router = createRouter({
 
         },
         {
-            path:"/edit/:id",
-            name:"edit",
+            path:"/edit-musique/:id",
+            name:"edit-musique",
             component: EditMusicView
-
         },
-        
+        {
+            path:"/edit-playlist/:id",
+            name:"edit-playlist",
+            component: EditPlaylistView
+        },
         {
             path:"/:pathmatch(.*)*",
             name:"Nor Found",

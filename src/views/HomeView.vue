@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
-import MusiCard from './MusiCard.vue'
+import MusiCard from './musicview/MusiCard.vue'
 
 
 const router=useRouter();

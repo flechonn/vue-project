@@ -86,7 +86,7 @@ async function toggleLike() {
 }
 
 function EditMusic(){
-    router.push(`/edit/${id}`);
+  router.push(`/edit-musique/${id}`);
 }
 
 
