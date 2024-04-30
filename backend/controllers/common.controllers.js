@@ -2,6 +2,8 @@ import fs from 'fs';
 
 export const LikedFilePath = new URL("../Likedtrack.json", import.meta.url).pathname;
 export const DataFilePath = new URL("../data.json", import.meta.url).pathname;
+export const PlaylistFilePath = new URL("../playlist.json", import.meta.url).pathname;
+
 
 
 export const deleteData = async (filePath, idToDelete) => {
