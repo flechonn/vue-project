@@ -1,8 +1,8 @@
 import fs from 'fs';
+const dataFilePath = new URL("../data.json", import.meta.url).pathname;
 
 //'/'
 export const setData = async (req, res) => {
-    const dataFilePath = new URL("../data.json", import.meta.url).pathname;
     console.log("Corps de la requête:", req.body);
 
     try {
@@ -33,8 +33,6 @@ export const setData = async (req, res) => {
 //'/:id'
 
 export const delData = async (req, res) => {
-    const dataFilePath = new URL("../data.json", import.meta.url).pathname;
-
     try {
         const idToDelete = parseInt(req.params.id);
         let existingData = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));
@@ -60,16 +58,13 @@ export const delData = async (req, res) => {
 
 
 export const getData = async (req, res) => {
-    const dataFilePath = new URL("../data.json", import.meta.url).pathname;
     const data = JSON.parse(fs.readFileSync(dataFilePath, "utf-8"));
     res.status(200).json(data);
 };
 
 export const patchData = async (req, res) => {
     console.log("Corps de la requête:", req.body);
-
     try {
-        const dataFilePath = new URL("../data.json", import.meta.url).pathname;
         const data = JSON.parse(fs.readFileSync(dataFilePath, "utf-8"));
         console.log("prams de la requête:", req.params);
         const index = data.findIndex(item => item.id === parseInt(req.params.id));

@@ -5,10 +5,10 @@ import {onBeforeMount,onMounted,ref} from "vue";
 const route = useRoute();
 const router = useRouter();
 const {id} = route.params;
+
 const likedTracks=ref(null);
 const data=ref(null)
 const musique = ref(null);
-
 const isChecked = ref(false); 
 
 async function loadliked(){
@@ -16,6 +16,8 @@ async function loadliked(){
     const response = await fetch('http://localhost:4000/api/liked/')
     if (response.ok) {
       likedTracks.value = await response.json(); // Parser le texte en JSON
+      console.log("likedtrack")
+      console.log(likedTracks.value)
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
@@ -28,12 +30,13 @@ async function loaddata(){
   try {
     const response = await fetch('http://localhost:4000/api/data/') 
     if (response.ok) {
-        // console.log(response.json())
+      // console.log(response.json())
       data.value = await response.json(); // Parser le texte en JSON
+      console.log("data value:")
       console.log(data.value)
-
       const c = data.value.find(c => c.id ===parseInt(id));
       musique.value = c
+      isLike()
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
@@ -66,7 +69,7 @@ async function addLiked() {
 
 async function delLiked() {
   try {
-    const response = await fetch(`http://localhost:4000/api/data/${id}`, {
+    const response = await fetch(`http://localhost:4000/liked/${id}`, {
       method: 'DELETE'
     });
     if (response.ok) {
@@ -76,6 +79,15 @@ async function delLiked() {
     }
     } catch (error) {
     console.error('Erreur lors de la suppression de la musique:', error);
+  }
+}
+
+function isLike(){
+  console.log(musique.value.id)
+  console.log(likedTracks.value.some(track => track.id === musique.value.id))
+
+  if (likedTracks.value.some(track => track.id === musique.value.id)) {
+        isChecked.value = true;
   }
 }
 
@@ -91,12 +103,9 @@ function EditMusic(){
     router.push(`/edit/${id}`);
 }
 
-// onBeforeMount(async () => {
-//     loadliked()
-//     loaddata()
-//    const c = data.value.find(c => c.id ===parseInt(id));
-//    musique.value = c
-// });
+
+
+
 
 onBeforeMount(async () => {
     loadliked()

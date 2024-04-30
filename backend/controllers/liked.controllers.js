@@ -1,19 +1,18 @@
 import fs from 'fs';
+const dataFilePath = new URL("../Likedtrack.json", import.meta.url).pathname;
 
 export const getLiked = async (req, res) => {
-    const dataFilePath = new URL("../Likedtrack.json", import.meta.url).pathname;
     const data = JSON.parse(fs.readFileSync(dataFilePath, "utf-8"));
     res.status(200).json(data);
 };
 
-export const addliked = async (req, res) => {
-    const dataFilePath = new URL("../Likedtrack.json", import.meta.url).pathname;
+export const addLiked = async (req, res) => {
     console.log("Corps de la requête:", req.body);
 
     try {
         const { titre, auteur, duree, album } = req.body;
         const newData = {
-            "idlike": -1,
+            "id": -1,
             "titre": titre,
             "auteur": auteur,
             "duree": duree,
@@ -28,7 +27,7 @@ export const addliked = async (req, res) => {
         existingData.push(newData);
         fs.writeFileSync(dataFilePath, JSON.stringify(existingData, null, 2));
         
-        return res.status(201).json({ message: "Musique ajoutée avec succès"  });
+        return res.status(201).json({ message: "Musique ajoutée aux musiques likés"  });
     } catch (error) {
         console.error('Erreur lors de l\'écriture des données dans le fichier:', error);
         return res.status(500).json({ message: "Erreur lors de l'écriture des données dans le fichier" });
@@ -36,8 +35,6 @@ export const addliked = async (req, res) => {
 }
 
 export const delLiked = async (req, res) => {
-    const dataFilePath = new URL("../Likedtrack.json", import.meta.url).pathname;
-
     try {
         const idToDelete = parseInt(req.params.id);
         let existingData = JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'));

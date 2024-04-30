@@ -1,8 +1,6 @@
 <script setup>
 import {onBeforeMount,ref} from "vue";
 
-const user=ref("")
-const email=ref("")
 const likedTracks=ref(null)
 
 async function loadliked(){
