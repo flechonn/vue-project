@@ -1,5 +1,7 @@
 <script setup>
 import {onBeforeMount,ref} from "vue";
+import MusiCard from './MusiCard.vue'
+
 
 const likedTracks=ref(null)
 
@@ -25,18 +27,22 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <h1>Music liked{{ likedTracks }}</h1>
-    <div class="container">
-      <h1>Account</h1>
-      <p>User :</p>
-      <p>Email :</p>
-      <p>Playlist:</p>
-      <p></p>
+  <div class="container">
+    <h1>Account</h1>
+    <p>User :</p>
+    <p>Email :</p>
+    <p>Playlist:</p>
+    <h1>Music liked</h1>
+    <div class="flex-container" v-if="likedTracks">
+      <MusiCard v-for="musique in likedTracks" :key="musique.id" :musique="musique" />
     </div>
-  </template>
+  </div>
+</template>
   
   <style>
-  p {
-    text-align: center;
+
+  .flex-container {
+  display: flex;
+  flex-direction: row; /* Pour afficher en ligne */
   }
   </style>

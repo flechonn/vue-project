@@ -62,7 +62,6 @@ async function deleteMusic(id) {
       <button @click="addMusic">AddMusic</button>
       <input type="text" v-model="idToDelete" placeholder="Entrez l'ID à supprimer">
       <button @click="deleteMusic(idToDelete)">DelMusic</button>
-      
     </div>
   </main>
 </template>
