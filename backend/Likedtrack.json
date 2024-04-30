@@ -7,18 +7,11 @@
     "album": "A Night at the Opera"
   },
   {
-    "id": 3,
-    "titre": "Hotel California",
-    "auteur": "Eagles",
-    "duree": "6:30",
-    "album": "Hotel California"
-  },
-  {
-    "id": 8,
-    "titre": "Like a Rolling Stone",
-    "auteur": "Bob Dylan",
-    "duree": "6:13",
-    "album": "Highway 61 Revisited"
+    "id": 4,
+    "titre": "Stairway to Heaven",
+    "auteur": "Led Zeppelin",
+    "duree": "8:02",
+    "album": "Led Zeppelin IV5"
   },
   {
     "id": 9,
@@ -26,5 +19,12 @@
     "auteur": "Jimi Hendrix",
     "duree": "2:50",
     "album": "Are You Experienced"
+  },
+  {
+    "titre": "On the floor",
+    "auteur": "Shakira",
+    "duree": "2:56",
+    "album": "hardstyle",
+    "id": 10
   }
 ]

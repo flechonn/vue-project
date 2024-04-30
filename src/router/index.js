@@ -7,8 +7,7 @@ import SingleAlbumView from '../views/SingleAlbumView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import addMusicView from '../views/addMusicView.vue'
 import EditMusicView from '../views/EditMusicView.vue'
-
-
+import PlaylistView from '../views/PlaylistView.vue'
 
 
 const router = createRouter({
@@ -23,6 +22,11 @@ const router = createRouter({
             path: "/account",
             name: "account",
             component: AccountView
+        },
+        {
+            path: "/account/:id",
+            name: "Playlist",
+            component: PlaylistView
         },
         {
             path: "/musiques/:id",
@@ -51,6 +55,7 @@ const router = createRouter({
             component: EditMusicView
 
         },
+        
         {
             path:"/:pathmatch(.*)*",
             name:"Nor Found",

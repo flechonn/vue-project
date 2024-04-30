@@ -1,7 +1,8 @@
 <script setup>
 import {onBeforeMount,ref} from "vue";
 import MusiCard from './MusiCard.vue'
-
+import Playlist from './Playlist.vue'; // Importez votre composant Playlist
+import playlists from '../playlist.json'
 
 const likedTracks=ref(null)
 
@@ -18,12 +19,22 @@ async function loadliked(){
   }
 }
 
+const createPlaylist = () => {
+  const lastId = playlists.value.length > 0 ? playlists.value[playlists.value.length - 1].id : 0;
+  
+  const newPlaylist = {
+    idplaylist: lastId + 1,
+    name: null,
+    description: null,
+    tracks: []
+  };
+
+  playlists.value.push(newPlaylist);
+};
 
 onBeforeMount(async () => {
   loadliked()
 })
-
-
 </script>
 
 <template>
@@ -31,8 +42,12 @@ onBeforeMount(async () => {
     <h1>Account</h1>
     <p>User :</p>
     <p>Email :</p>
-    <p>Playlist:</p>
-    <h1>Music liked</h1>
+    <h2>Playlists:</h2>
+    <div class="flex-container" v-if="playlists">
+      <Playlist v-for="playlist in playlists" :key="playlist.id" :playlist="playlist" />
+    </div>
+    <button @click="createPlaylist">Create Playlist</button>
+    <h2>Music liked</h2>
     <div class="flex-container" v-if="likedTracks">
       <MusiCard v-for="musique in likedTracks" :key="musique.id" :musique="musique" />
     </div>

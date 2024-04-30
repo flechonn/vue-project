@@ -1,0 +1,94 @@
+[
+    {
+      "id": 1,
+      "name": "Classic Rock",
+      "description": "A collection of classic rock songs.",
+      "tracks": [
+        {
+          "id": 1,
+          "titre": "Bohemian Rhapsody",
+          "auteur": "Queen",
+          "duree": "5:55",
+          "album": "A Night at the Opera"
+        },
+        {
+          "id": 2,
+          "titre": "Imagine",
+          "auteur": "John Lennon",
+          "duree": "3:02",
+          "album": "Imagine"
+        },
+        {
+          "id": 3,
+          "titre": "Hotel California",
+          "auteur": "Eagles",
+          "duree": "6:30",
+          "album": "Hotel California"
+        },
+        {
+          "id": 4,
+          "titre": "Stairway to Heaven",
+          "auteur": "Led Zeppelin",
+          "duree": "8:02",
+          "album": "Led Zeppelin IV"
+        },
+        {
+          "id": 5,
+          "titre": "Hey Jude",
+          "auteur": "The Beatles",
+          "duree": "7:11",
+          "album": "Hey Jude"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "90s Hits",
+      "description": "The best hits from the 90s.",
+      "tracks": [
+        {
+          "id": 6,
+          "titre": "Smells Like Teen Spirit",
+          "auteur": "Nirvana",
+          "duree": "5:01",
+          "album": "Nevermind"
+        },
+        {
+          "id": 7,
+          "titre": "Thriller",
+          "auteur": "Michael Jackson",
+          "duree": "5:57",
+          "album": "Thriller"
+        },
+        {
+          "id": 8,
+          "titre": "Like a Rolling Stone",
+          "auteur": "Bob Dylan",
+          "duree": "6:13",
+          "album": "Highway 61 Revisited"
+        },
+        {
+          "id": 9,
+          "titre": "Purple Haze",
+          "auteur": "Jimi Hendrix",
+          "duree": "2:50",
+          "album": "Are You Experienced"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Dance",
+      "description": "Playlist for dancing.",
+      "tracks": [
+        {
+          "id": 10,
+          "titre": "On the Floor",
+          "auteur": "Shakira",
+          "duree": "2:56",
+          "album": "hardstyle"
+        }
+      ]
+    }
+  ]
+  
