@@ -89,5 +89,19 @@
         "album": "hardstyle"
       }
     ]
+  },
+  {
+    "id": 4,
+    "name": "techno",
+    "description": "Playlist for caisson.",
+    "tracks": [
+      {
+        "id": 10,
+        "titre": "On the Floor",
+        "auteur": "Shakira",
+        "duree": "2:56",
+        "album": "hardstyle"
+      }
+    ]
   }
 ]
