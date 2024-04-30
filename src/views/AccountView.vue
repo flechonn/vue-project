@@ -1,11 +1,12 @@
 <script setup>
 import {onBeforeMount,ref} from "vue";
+import { useRouter } from 'vue-router';
 import MusiCard from './musicview/MusiCard.vue'
 import Playlist from './playlistview/Playlist.vue'; // Importez votre composant Playlist
 
 const likedTracks=ref(null)
 const playlists=ref(null)
-
+const router=useRouter();
 async function loadliked(){
   try {
     const response = await fetch('http://localhost:4000/api/liked/') // L'URL '/data' correspond à votre route Express pour récupérer les données
@@ -34,16 +35,7 @@ async function loadplaylist(){
 }
 
 const createPlaylist = () => {
-  const lastId = playlists.value.length > 0 ? playlists.value[playlists.value.length - 1].id : 0;
-  
-  const newPlaylist = {
-    idplaylist: lastId + 1,
-    name: null,
-    description: null,
-    tracks: []
-  };
-
-  playlists.value.push(newPlaylist);
+  router.push(`addPlaylist`);
 };
 
 onBeforeMount(async () => {

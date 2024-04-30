@@ -9,6 +9,7 @@ import addMusicView from '../views/musicview/addMusicView.vue'
 import EditMusicView from '../views/musicview/EditMusicView.vue'
 import PlaylistView from '../views/playlistview/PlaylistView.vue'
 import EditPlaylistView from '../views/playlistview/EditPlaylistView.vue'
+import AddPlaylistView from "../views/playlistview/AddPlaylistView.vue"
 
 
 
@@ -50,6 +51,12 @@ const router = createRouter({
             path:"/addMusic",
             name:"addMusic",
             component: addMusicView
+
+        },
+        {
+            path:"/addPlaylist",
+            name:"addPlaylist",
+            component: AddPlaylistView
 
         },
         {

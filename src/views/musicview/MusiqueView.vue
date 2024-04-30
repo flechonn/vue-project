@@ -89,10 +89,6 @@ function EditMusic(){
   router.push(`/edit-musique/${id}`);
 }
 
-
-
-
-
 onBeforeMount(async () => {
     loadliked()
     loaddata()
