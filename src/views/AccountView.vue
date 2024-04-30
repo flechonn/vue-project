@@ -2,15 +2,29 @@
 import {onBeforeMount,ref} from "vue";
 import MusiCard from './MusiCard.vue'
 import Playlist from './Playlist.vue'; // Importez votre composant Playlist
-import playlists from '../playlist.json'
 
 const likedTracks=ref(null)
+const playlists=ref(null)
 
 async function loadliked(){
   try {
     const response = await fetch('http://localhost:4000/api/liked/') // L'URL '/data' correspond à votre route Express pour récupérer les données
     if (response.ok) {
       likedTracks.value = await response.json(); // Parser le texte en JSON
+    } else {
+      console.error('Erreur1 lors de la récupération des données:', response.statusText)
+    }
+  } catch (error) {
+    console.error('Erreur2 lors de la récupération des données:', error)
+  }
+}
+
+async function loadplaylist(){
+  try {
+    const response = await fetch('http://localhost:4000/playlist/') // L'URL '/data' correspond à votre route Express pour récupérer les données
+    if (response.ok) {
+      playlists.value = await response.json(); // Parser le texte en JSON
+      
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
@@ -34,6 +48,7 @@ const createPlaylist = () => {
 
 onBeforeMount(async () => {
   loadliked()
+  loadplaylist()
 })
 </script>
 

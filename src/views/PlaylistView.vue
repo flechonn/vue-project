@@ -1,7 +1,6 @@
 <script setup>
 import {useRoute, useRouter} from "vue-router";
 import {onBeforeMount,onMounted,ref} from "vue";
-import playlists from '../playlist.json'
 import MusiCard from './MusiCard.vue'
 
 
@@ -9,18 +8,16 @@ const route = useRoute();
 const router = useRouter();
 const {id} = route.params;
 
-const laplaylist =ref(null);
+const playlist =ref(null);
+const laplaylist = ref(null);
 
-const likedTracks=ref(null);
-const data=ref(null)
-const musique = ref(null);
-const isChecked = ref(false); 
-
-async function loadliked(){
+async function loadplaylist(){
   try {
-    const response = await fetch('http://localhost:4000/api/liked/')
+    const response = await fetch('http://localhost:4000/playlist/') // L'URL '/data' correspond à votre route Express pour récupérer les données
     if (response.ok) {
-      likedTracks.value = await response.json(); // Parser le texte en JSON
+      playlist.value = await response.json(); // Parser le texte en JSON
+      const c = playlist.value.find(c => c.id ===parseInt(id));
+      laplaylist.value = c
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
@@ -28,38 +25,18 @@ async function loadliked(){
     console.error('Erreur2 lors de la récupération des données:', error)
   }
 }
-
-async function loaddata(){
-  try {
-    const response = await fetch('http://localhost:4000/api/data/') 
-    if (response.ok) {
-      // console.log(response.json())
-      data.value = await response.json(); // Parser le texte en JSON
-      const c = data.value.find(c => c.id ===parseInt(id));
-      musique.value = c
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
-
 
 onBeforeMount(async () => {
-    loadliked()
-    loaddata()
-    const c = playlists.find(c => c.id ==id);
-    laplaylist.value = c;
+    loadplaylist()
 });
 </script>
 
 <template>
-    <div class="playlist">
+    <div class="playlist" v-if="laplaylist">
       <h3>{{ laplaylist.name }}</h3>
       <p>{{ laplaylist.description }}</p>
     </div>
-      <div class="flex-container" v-if="likedTracks">
+      <div class="flex-container" v-if="laplaylist">
         <MusiCard v-for="track in laplaylist.tracks" :key="track.id" :musique="track"/>
       </div>
     <button @click="router.back()">Go back</button>

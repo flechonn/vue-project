@@ -16,8 +16,6 @@ async function loadliked(){
     const response = await fetch('http://localhost:4000/api/liked/')
     if (response.ok) {
       likedTracks.value = await response.json(); // Parser le texte en JSON
-      console.log("likedtrack")
-      console.log(likedTracks.value)
     } else {
       console.error('Erreur1 lors de la récupération des données:', response.statusText)
     }
@@ -30,10 +28,7 @@ async function loaddata(){
   try {
     const response = await fetch('http://localhost:4000/api/data/') 
     if (response.ok) {
-      // console.log(response.json())
       data.value = await response.json(); // Parser le texte en JSON
-      console.log("data value:")
-      console.log(data.value)
       const c = data.value.find(c => c.id ===parseInt(id));
       musique.value = c
       isLike()
@@ -46,7 +41,6 @@ async function loaddata(){
 }
 
 async function addLiked() {
-  console.log("test addliked");
   try {
     const response = await fetch(`http://localhost:4000/liked/${id}`, {
       method: 'POST',
@@ -55,13 +49,9 @@ async function addLiked() {
       },
       body: JSON.stringify(musique.value)
     });
-    console.log("test addliked");
     if (!response.ok) {
       throw new Error('La requête n\'a pas abouti : ' + response.status);
     }
-
-    console.log("Requête réussie!");
-    console.log("Réponse de l'API :", await response.json());
   } catch (error) {
     console.error('Erreur lors de l\'envoi de la requête:', error);
   }
@@ -73,7 +63,6 @@ async function delLiked() {
       method: 'DELETE'
     });
     if (response.ok) {
-      console.log("Musique supprimée avec succès");
     } else {
       console.error('Erreur lors de la suppression de la musique:', response.statusText);
     }
@@ -83,11 +72,8 @@ async function delLiked() {
 }
 
 function isLike(){
-  console.log(musique.value.id)
-  console.log(likedTracks.value.some(track => track.id === musique.value.id))
-
   if (likedTracks.value.some(track => track.id === musique.value.id)) {
-        isChecked.value = true;
+    isChecked.value = true;
   }
 }
 
