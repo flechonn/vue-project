@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue'
 
 import {useRouter} from "vue-router";
+import { postData } from '../../utils.js'
+
 
 const router = useRouter();
 
@@ -14,23 +16,9 @@ const newMusic = ref({
 const musicAdded=ref(false)
 
 async function addMusic() {
-  console.log("test addMusic");
   try {
-    const response = await fetch('http://localhost:4000/data/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newMusic.value)
-    });
-    console.log("test addMusic");
-    if (!response.ok) {
-      throw new Error('La requête n\'a pas abouti : ' + response.status);
-    }
-
-    console.log("Requête réussie!");
-    console.log("Réponse de l'API :", await response.json());
-    musicAdded.value = true; // Modification de la valeur de musicAdded    
+    const response = await postData('http://localhost:4000/data/', newMusic.value);
+    musicAdded.value = true; // Modification de la valeur de musicAdded
   } catch (error) {
     console.error('Erreur lors de l\'envoi de la requête:', error);
   }

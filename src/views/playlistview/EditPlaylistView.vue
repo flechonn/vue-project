@@ -1,6 +1,9 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { onBeforeMount, ref } from "vue";
+import { fetchData,patchData,deleteData } from '../../utils.js'
+
+
 const route = useRoute();
 const router = useRouter();
 const {id} = route.params;
@@ -8,47 +11,27 @@ const {id} = route.params;
 const playlist =ref(null);
 const laplaylist = ref(null);
 
-async function loadplaylist(){
-  try {
-    const response = await fetch('http://localhost:4000/playlist/') // L'URL '/data' correspond à votre route Express pour récupérer les données
-    if (response.ok) {
-      playlist.value = await response.json(); // Parser le texte en JSON
-      const c = playlist.value.find(c => c.id ===parseInt(id));
-      laplaylist.value = c
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
-
 onBeforeMount(async () => {
-    loadplaylist()
+  try {
+    playlist.value = await fetchData('http://localhost:4000/playlist/');
+    const c = playlist.value.find(c => c.id === parseInt(id));
+    laplaylist.value = c;
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 async function editPlaylist() {
-    console.log("test editPlaylist");
-    try {
-      const response = await fetch(`http://localhost:4000/playlist/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: laplaylist.value.name,
-          description: laplaylist.value.description,
-        //   tracks: laplaylist.value.tracks,
-        })
-      });
-      if (!response.ok) {
-        throw new Error('La requête n\'a pas abouti : ' + response.status);
-      }
-      console.log("Requête réussie!");
-      console.log("Modifications enregistrées :", laplaylist.value);
-    } catch (error) {
-      console.error('Erreur lors de l\'envoi de la requête:', error);
-    }
+  try {
+    const response = await patchData(`http://localhost:4000/playlist/${id}`, {
+      name: laplaylist.value.name,
+      description: laplaylist.value.description,
+      // tracks: laplaylist.value.tracks,
+    });
+    console.log("Modifications enregistrées :", laplaylist.value);
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi de la requête:', error);
+  }
 }
 </script>
 

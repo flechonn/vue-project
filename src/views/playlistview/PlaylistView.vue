@@ -2,6 +2,7 @@
 import {useRoute, useRouter} from "vue-router";
 import {onBeforeMount,onMounted,ref} from "vue";
 import MusiCard from '../musicview/MusiCard.vue'
+import { fetchData } from '../../utils.js'
 
 
 const route = useRoute();
@@ -11,27 +12,20 @@ const {id} = route.params;
 const playlist =ref(null);
 const laplaylist = ref(null);
 
-async function loadplaylist(){
-  try {
-    const response = await fetch('http://localhost:4000/playlist/') // L'URL '/data' correspond à votre route Express pour récupérer les données
-    if (response.ok) {
-      playlist.value = await response.json(); // Parser le texte en JSON
-      const c = playlist.value.find(c => c.id ===parseInt(id));
-      laplaylist.value = c
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
 
 function EditPlaylist(){
   router.push(`/edit-playlist/${id}`);
 }
 
 onBeforeMount(async () => {
-    loadplaylist()
+  try {
+    playlist.value = await fetchData('http://localhost:4000/playlist/');
+    
+    const c = playlist.value.find(c => c.id ===parseInt(id));
+    laplaylist.value = c
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 </script>
 

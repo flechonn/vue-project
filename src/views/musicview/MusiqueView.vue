@@ -1,6 +1,7 @@
 <script setup>
 import {useRoute, useRouter} from "vue-router";
 import {onBeforeMount,onMounted,ref} from "vue";
+import { fetchData,postData,deleteData } from '../../utils.js'
 
 const route = useRoute();
 const router = useRouter();
@@ -11,63 +12,19 @@ const data=ref(null)
 const musique = ref(null);
 const isChecked = ref(false); 
 
-async function loadliked(){
-  try {
-    const response = await fetch('http://localhost:4000/api/liked/')
-    if (response.ok) {
-      likedTracks.value = await response.json(); // Parser le texte en JSON
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
-
-async function loaddata(){
-  try {
-    const response = await fetch('http://localhost:4000/api/data/') 
-    if (response.ok) {
-      data.value = await response.json(); // Parser le texte en JSON
-      const c = data.value.find(c => c.id ===parseInt(id));
-      musique.value = c
-      isLike()
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
-
 async function addLiked() {
   try {
-    const response = await fetch(`http://localhost:4000/liked/${id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(musique.value)
-    });
-    if (!response.ok) {
-      throw new Error('La requête n\'a pas abouti : ' + response.status);
-    }
+    await postData(`http://localhost:4000/liked/${id}`, musique.value);
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de la requête:', error);
+    console.error(error.message);
   }
 }
 
 async function delLiked() {
   try {
-    const response = await fetch(`http://localhost:4000/liked/${id}`, {
-      method: 'DELETE'
-    });
-    if (response.ok) {
-    } else {
-      console.error('Erreur lors de la suppression de la musique:', response.statusText);
-    }
-    } catch (error) {
-    console.error('Erreur lors de la suppression de la musique:', error);
+    await deleteData(`http://localhost:4000/liked/${id}`);
+  } catch (error) {
+    console.error(error.message);
   }
 }
 
@@ -90,8 +47,16 @@ function EditMusic(){
 }
 
 onBeforeMount(async () => {
-    loadliked()
-    loaddata()
+  try {
+    likedTracks.value = await fetchData('http://localhost:4000/api/liked/');
+    data.value = await fetchData('http://localhost:4000/api/data/');
+    
+    const c = data.value.find(c => c.id === parseInt(id));
+    musique.value = c;
+    isLike();
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 </script>
 

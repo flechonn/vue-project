@@ -1,6 +1,8 @@
 <script setup>
   import { useRoute, useRouter } from "vue-router";
   import { onBeforeMount, ref } from "vue";
+  import { fetchData } from '../../utils.js'
+
 
   const route = useRoute();
   const router = useRouter();
@@ -8,22 +10,17 @@
   const { id } = route.params;
   const data=ref(null)
 
-  async function loadmusic(){
-  try {
-    const response = await fetch('http://localhost:4000/api/data/') // L'URL '/data' correspond à votre route Express pour récupérer les données
-    if (response.ok) {
-      data.value = await response.json(); // Parser le texte en JSON
-      const c = data.value.find((c) => c.id === parseInt(id));
-      musique.value = c;
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
+
   onBeforeMount(async () => {
-    loadmusic()
+    try {
+    data.value = await fetchData('http://localhost:4000/api/data/');
+    
+    const c = data.value.find(c => c.id === parseInt(id));
+    musique.value = c;
+    isLike();
+  } catch (error) {
+    console.error(error.message);
+  }
   })
 
   async function PatchMusic() {

@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { postData } from '../../utils.js'
+
 
 const router = useRouter();
 
@@ -13,19 +15,7 @@ const playlistAdded = ref(false)
 
 async function addPlaylist() {
   try {
-    const response = await fetch('http://localhost:4000/playlists/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newPlaylist.value)
-    });
-
-    if (!response.ok) {
-      throw new Error('La requête n\'a pas abouti : ' + response.status);
-    }
-
-    console.log("Réponse de l'API :", await response.json());
+    const response = await postData('http://localhost:4000/playlists/', newPlaylist.value);
     playlistAdded.value = true;
   } catch (error) {
     console.error('Erreur lors de l\'envoi de la requête:', error);
