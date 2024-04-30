@@ -22,6 +22,11 @@ async function loaddata(){
 }
 
 onMounted(async () => {
+  try {
+    data.value = await fetchData('http://localhost:4000/api/data/');
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données:', error.message);
+  }
   loaddata()
 })
 

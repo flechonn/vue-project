@@ -3,44 +3,23 @@ import {onBeforeMount,ref} from "vue";
 import { useRouter } from 'vue-router';
 import MusiCard from './musicview/MusiCard.vue'
 import Playlist from './playlistview/Playlist.vue'; // Importez votre composant Playlist
+import { fetchData } from '../utils.js'
 
 const likedTracks=ref(null)
 const playlists=ref(null)
 const router=useRouter();
-async function loadliked(){
-  try {
-    const response = await fetch('http://localhost:4000/api/liked/') // L'URL '/data' correspond à votre route Express pour récupérer les données
-    if (response.ok) {
-      likedTracks.value = await response.json(); // Parser le texte en JSON
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
-
-async function loadplaylist(){
-  try {
-    const response = await fetch('http://localhost:4000/playlist/') // L'URL '/data' correspond à votre route Express pour récupérer les données
-    if (response.ok) {
-      playlists.value = await response.json(); // Parser le texte en JSON
-      
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
 
 const createPlaylist = () => {
   router.push(`addPlaylist`);
 };
 
 onBeforeMount(async () => {
-  loadliked()
-  loadplaylist()
+  try {
+    likedTracks.value = await fetchData('http://localhost:4000/api/liked/');
+    playlists.value = await fetchData('http://localhost:4000/playlist/');
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données:', error.message);
+  }
 })
 </script>
 
