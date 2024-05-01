@@ -1,6 +1,7 @@
 <script setup>
 import {RouterView,RouterLink} from "vue-router"
 import { ref, onMounted } from 'vue'
+import { fetchData } from "./utils";
 
 const data = ref(null)
 
@@ -19,7 +20,11 @@ async function loaddata(){
 
 
 onMounted(async () => {
-  loaddata()
+  try {
+    data.value = await fetchData('http://localhost:4000/api/data') // Parser le texte en JSON
+  } catch (error) {
+    console.error('Erreur2 lors de la récupération des données:', error)
+  }
 })
 
 

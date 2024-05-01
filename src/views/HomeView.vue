@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
+import { fetchData,deleteData } from '../utils';
 import MusiCard from './musicview/MusiCard.vue'
 
 
@@ -10,24 +11,14 @@ const idToDelete =ref(null)
 
 async function loaddata(){
   try {
-    const response = await fetch('http://localhost:4000/api/data/') // L'URL '/data' correspond à votre route Express pour récupérer les données
-    if (response.ok) {
-      data.value = await response.json(); // Parser le texte en JSON
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
+    data.value = await fetchData('http://localhost:4000/data/');
   } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
+    console.error('Erreur lors de la récupération des données:', error.message);
   }
 }
 
 onMounted(async () => {
-  try {
-    data.value = await fetchData('http://localhost:4000/api/data/');
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données:', error.message);
-  }
-  loaddata()
+  await loaddata()
 })
 
 async function addMusic() {
@@ -36,17 +27,9 @@ async function addMusic() {
 
 async function deleteMusic(id) {
   try {
-    const response = await fetch(`http://localhost:4000/api/data/${id}`, {
-      method: 'DELETE'
-    });
-    
-    if (response.ok) {
-      // Recharger les données après la suppression réussie
-      await loaddata();
-      console.log("Musique supprimée avec succès");
-    } else {
-      console.error('Erreur lors de la suppression de la musique:', response.statusText);
-    }
+    await deleteData(`http://localhost:4000/data/${id}`)
+    await loaddata();
+    console.log("Musique supprimée avec succès");
   } catch (error) {
     console.error('Erreur lors de la suppression de la musique:', error);
   }

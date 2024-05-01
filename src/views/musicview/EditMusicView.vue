@@ -1,7 +1,7 @@
 <script setup>
   import { useRoute, useRouter } from "vue-router";
   import { onBeforeMount, ref } from "vue";
-  import { fetchData } from '../../utils.js'
+  import { patchData,fetchData } from '../../utils.js'
 
 
   const route = useRoute();
@@ -23,31 +23,21 @@
   }
   })
 
-  async function PatchMusic() {
-  console.log("test PatchMusic");
+  async function EditMusic() {
   try {
-    const response = await fetch(`http://localhost:4000/data/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    const response = await patchData(`http://localhost:4000/data/${id}`, {
         auteur: musique.value.auteur,
         titre: musique.value.titre,
         duree: musique.value.duree,
         album: musique.value.album
-      })
     });
-    if (!response.ok) {
-      throw new Error('La requête n\'a pas abouti : ' + response.status);
-    }
-
-    console.log("Requête réussie!");
     console.log("Modifications enregistrées :", musique.value);
   } catch (error) {
     console.error('Erreur lors de l\'envoi de la requête:', error);
   }
 }
+
+
 
 
 </script>
@@ -58,7 +48,7 @@
     <div class="contan" v-if="musique">
       <h1>La musique</h1>
       <!-- Formulaire pour éditer les informations de la musique -->
-      <form @submit.prevent="PatchMusic">
+      <form @submit.prevent="EditMusic">
         <label for="auteur">Auteur:</label>
         <input type="text" id="auteur" v-model="musique.auteur" />
         <label for="titre">Titre:</label>

@@ -48,4 +48,3 @@ const musiques = ref(musiqueData);
 
 
 </style>
-export const like = ref([]);
