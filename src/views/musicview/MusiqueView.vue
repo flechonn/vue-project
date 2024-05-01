@@ -9,7 +9,9 @@ const {id} = route.params;
 
 const likedTracks=ref(null);
 const data=ref(null)
+const playlists = ref(null);
 const musique = ref(null);
+const selectedPlaylist = ref(null);
 const isChecked = ref(false); 
 
 async function addLiked() {
@@ -46,10 +48,20 @@ function EditMusic(){
   router.push(`/edit-musique/${id}`);
 }
 
+async function addToPlaylist() {
+    try {
+        await postData(`http://localhost:4000/playlist/${selectedPlaylist.value}/add`, musique.value);
+        console.log("Musique ajoutée à la playlist avec succès !");
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
 onBeforeMount(async () => {
   try {
     likedTracks.value = await fetchData('http://localhost:4000/api/liked/');
     data.value = await fetchData('http://localhost:4000/api/data/');
+    playlists.value = await fetchData('http://localhost:4000/playlist/');
     
     const c = data.value.find(c => c.id === parseInt(id));
     musique.value = c;
@@ -79,7 +91,14 @@ onBeforeMount(async () => {
                 <span v-if="isChecked" class="heart">❤️</span>
                 <span v-else class="circle"></span>
             </label>
-            </div>
+        </div>
+        <div>
+            <label for="playlistSelect">Ajouter à la playlist :</label>
+            <select id="playlistSelect" v-model="selectedPlaylist">
+                <option v-for="playlist in playlists" :key="playlist.id" :value="playlist.id">{{ playlist.name }}</option>
+            </select>
+            <button @click="addToPlaylist">Ajouter à la playlist</button>
+        </div>
         <button @click="router.back()">Go back</button>
     </div>
 </template>

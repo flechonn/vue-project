@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { deleteData,postData,patchData,DataFilePath,LikedFilePath } from './common.controllers.js';
+import { deleteData, postData, patchData, DataFilePath, LikedFilePath } from './common.controllers.js';
 
 
 export const delData = async (req, res) => {
@@ -29,7 +29,7 @@ export const getData = async (req, res) => {
 };
 
 export const editData = async (req, res) => {
-    await patchData(DataFilePath,req,res);
+    await patchData(DataFilePath, req, res);
 };
 
 
