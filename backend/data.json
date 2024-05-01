@@ -68,5 +68,12 @@
     "duree": "2:56",
     "album": "hardstyle",
     "id": 10
+  },
+  {
+    "titre": "Pieere",
+    "auteur": "Boisssard",
+    "duree": "3;42",
+    "album": "Maxime",
+    "id": 11
   }
 ]

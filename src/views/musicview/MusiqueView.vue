@@ -99,19 +99,19 @@ onBeforeMount(async () => {
 }
 
 .heart {
-  font-size: 24px; /* Taille du cœur */
+  font-size: 24px; 
 }
 
 .circle {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-color: #000; /* Couleur du cercle */
-  border-radius: 50%; /* Pour former un cercle */
+  background-color: #000; 
+  border-radius: 50%; 
 }
 
 /* Style de la case à cocher */
 #heartCheckbox {
-  display: none; /* Cacher la case à cocher */
+  display: none; 
 }
 </style>

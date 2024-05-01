@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router';
 const props = defineProps({
   playlist: Object
 });
-
 const router = useRouter();
 
 function goToMusicDetail() {

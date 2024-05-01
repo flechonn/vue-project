@@ -5,20 +5,6 @@ import { fetchData } from "./utils";
 
 const data = ref(null)
 
-async function loaddata(){
-  try {
-    const response = await fetch('http://localhost:4000/api/data') // L'URL '/data' correspond à votre route Express pour récupérer les données
-    if (response.ok) {
-      data.value = await response.json(); // Parser le texte en JSON
-    } else {
-      console.error('Erreur1 lors de la récupération des données:', response.statusText)
-    }
-  } catch (error) {
-    console.error('Erreur2 lors de la récupération des données:', error)
-  }
-}
-
-
 onMounted(async () => {
   try {
     data.value = await fetchData('http://localhost:4000/api/data') // Parser le texte en JSON
@@ -27,8 +13,6 @@ onMounted(async () => {
   }
 })
 
-
-// const count = ref(0)
 </script>
 
 <template>

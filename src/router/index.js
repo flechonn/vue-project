@@ -12,8 +12,6 @@ import EditPlaylistView from '../views/playlistview/EditPlaylistView.vue'
 import AddPlaylistView from "../views/playlistview/AddPlaylistView.vue"
 
 
-
-
 const router = createRouter({
     history:createWebHistory(import.meta.env.BASE_URL),
     routes: [

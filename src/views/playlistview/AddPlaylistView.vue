@@ -5,13 +5,11 @@ import { postData } from '../../utils.js'
 
 
 const router = useRouter();
-
+const playlistAdded = ref(false)
 const newPlaylist = ref({
   nom: '',
   description: ''
 })
-
-const playlistAdded = ref(false)
 
 async function addPlaylist() {
   try {

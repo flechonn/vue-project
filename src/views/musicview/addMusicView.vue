@@ -18,7 +18,7 @@ const musicAdded=ref(false)
 async function addMusic() {
   try {
     const response = await postData('http://localhost:4000/data/', newMusic.value);
-    musicAdded.value = true; // Modification de la valeur de musicAdded
+    musicAdded.value = true; // Modification de la valeur de musicAdded pour l'affichage
   } catch (error) {
     console.error('Erreur lors de l\'envoi de la requête:', error);
   }

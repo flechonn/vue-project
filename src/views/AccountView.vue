@@ -9,7 +9,7 @@ const likedTracks=ref(null)
 const playlists=ref(null)
 const router=useRouter();
 
-const createPlaylist = () => {
+function createPlaylist(){
   router.push(`addPlaylist`);
 };
 
@@ -32,7 +32,7 @@ onBeforeMount(async () => {
     <div class="flex-container" v-if="playlists">
       <Playlist v-for="playlist in playlists" :key="playlist.id" :playlist="playlist" />
     </div>
-    <button @click="createPlaylist">Create Playlist</button>
+    <button @click="createPlaylist()">Create Playlist</button>
     <h2>Music liked</h2>
     <div class="flex-container" v-if="likedTracks">
       <MusiCard v-for="musique in likedTracks" :key="musique.id" :musique="musique" />

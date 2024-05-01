@@ -17,10 +17,6 @@ async function loaddata(){
   }
 }
 
-onMounted(async () => {
-  await loaddata()
-})
-
 async function addMusic() {
   router.push(`addMusic`);
 }
@@ -34,6 +30,11 @@ async function deleteMusic(id) {
     console.error('Erreur lors de la suppression de la musique:', error);
   }
 }
+
+onMounted(async () => {
+  await loaddata()
+})
+
 </script>
 
 

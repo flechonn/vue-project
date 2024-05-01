@@ -37,17 +37,12 @@
   }
 }
 
-
-
-
 </script>
 
 <template>
   <div class="container">
-    <!-- Affichage des détails de la musique -->
     <div class="contan" v-if="musique">
       <h1>La musique</h1>
-      <!-- Formulaire pour éditer les informations de la musique -->
       <form @submit.prevent="EditMusic">
         <label for="auteur">Auteur:</label>
         <input type="text" id="auteur" v-model="musique.auteur" />

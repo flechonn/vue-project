@@ -7,17 +7,15 @@ export const PlaylistFilePath = new URL("../playlist.json", import.meta.url).pat
 export const deleteData = async (filePath, idToDelete) => {
     try {
         let existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-        // Recherche de l'index de l'élément avec l'ID à supprimer
         const indexToDelete = existingData.findIndex(item => item.id === idToDelete);
         
         if (indexToDelete !== -1) {
             // Suppression de l'élément correspondant à l'ID
             existingData.splice(indexToDelete, 1);
-            // Réécriture des données mises à jour dans le fichier
             fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
-            return true; // Indique que la suppression a réussi
+            return true; 
         } else {
-            return false; // Indique que l'élément n'a pas été trouvé
+            return false; 
         }
     } catch (error) {
         console.error('Erreur lors de la suppression des données dans le fichier:', error);

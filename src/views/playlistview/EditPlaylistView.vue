@@ -11,16 +11,6 @@ const {id} = route.params;
 const playlist =ref(null);
 const laplaylist = ref(null);
 
-onBeforeMount(async () => {
-  try {
-    playlist.value = await fetchData('http://localhost:4000/playlist/');
-    const c = playlist.value.find(c => c.id === parseInt(id));
-    laplaylist.value = c;
-  } catch (error) {
-    console.error(error.message);
-  }
-});
-
 async function editPlaylist() {
   try {
     const response = await patchData(`http://localhost:4000/playlist/${id}`, {
@@ -33,6 +23,17 @@ async function editPlaylist() {
     console.error('Erreur lors de l\'envoi de la requête:', error);
   }
 }
+
+onBeforeMount(async () => {
+  try {
+    playlist.value = await fetchData('http://localhost:4000/playlist/');
+    const c = playlist.value.find(c => c.id === parseInt(id));
+    laplaylist.value = c;
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 </script>
 
 <template>

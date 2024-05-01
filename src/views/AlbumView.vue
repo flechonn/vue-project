@@ -2,9 +2,8 @@
 import { ref } from 'vue';
 import musiqueData from '../data.json';
 import { useRouter } from 'vue-router';
-import { RouterLink } from 'vue-router';
 import { likedTracks } from "../Likedtrack"
-const name =ref("nom");
+
 const route=useRouter();
 const musiques = ref(musiqueData);
 
@@ -16,7 +15,6 @@ const musiques = ref(musiqueData);
     <h1>Les albums </h1>
     <div class="musiques">
         <div class="musique" v-for="musique in musiques" :key="musique.id" @click="route.push(`/album/${musique.album}`)">
-        <!-- <RouterLink :to="`/musiques/${musique.id}`" class="musique" v-for="musique in musiques" :key="musique.id"> -->
           <h2>{{ musique.album }}</h2>
         </div>
     </div>
