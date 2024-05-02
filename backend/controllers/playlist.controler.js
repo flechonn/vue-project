@@ -4,7 +4,8 @@ import { patchData,postData,deleteData,PlaylistFilePath } from './common.control
 export const delPlaylist = async (req, res) => {
     try {
         const idToDelete = parseInt(req.params.id);
-        const success = deleteData(PlaylistFilePath, idToDelete);
+        console.log(idToDelete)
+        const success = deleteData(PlaylistFilePath, idToDelete,true);
         if (success) {
             return res.status(200).json({ message: `Playlist supprimée avec succès: ${idToDelete}` });
         } else {

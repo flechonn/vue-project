@@ -4,7 +4,7 @@ import { deleteData,LikedFilePath,postData } from './common.controllers.js';
 export const delLiked = async (req, res) => {
     try {
         const idToDelete = parseInt(req.params.id);
-        const success = deleteData(LikedFilePath, idToDelete);
+        const success = deleteData(LikedFilePath, idToDelete,false);
         if (success) {
             return res.status(200).json({ message: `Musique supprimée avec succès: ${idToDelete}` });
         } else {

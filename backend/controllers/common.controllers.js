@@ -6,10 +6,15 @@ export const PlaylistFilePath = new URL("../playlist.json", import.meta.url).pat
 
 
 
-export const deleteData = (filePath, idToDelete) => {
+export const deleteData = (filePath, idToDelete,boolplaylist) => {
     try {
         let existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-        const indexToDelete = existingData.findIndex(item => item.id === idToDelete);
+        let indexToDelete=0
+        if(boolplaylist){
+            indexToDelete = existingData.findIndex(item => item.idp === idToDelete);
+        }else{
+            indexToDelete = existingData.findIndex(item => item.id === idToDelete);
+        }
         
         if (indexToDelete !== -1) {
             // Suppression de l'élément correspondant à l'ID

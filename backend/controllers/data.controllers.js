@@ -22,10 +22,10 @@ function removeTrackFromPlaylists(trackId) {
 export const delData = async (req, res) => {
     try {
         const idToDelete = parseInt(req.params.id);
-        const successData = deleteData(DataFilePath, idToDelete);
+        const successData = deleteData(DataFilePath, idToDelete,false);
         if (successData) {
             //si la musique est présente on essaye de la supprime des titres likées
-            deleteData(LikedFilePath, idToDelete);
+            deleteData(LikedFilePath, idToDelete,false);
             return res.status(200).json({ message: `Musique supprimée avec succès: ${idToDelete}` });
         } else {
             return res.status(404).json({ message: "Aucune musique trouvée avec cet ID" });
