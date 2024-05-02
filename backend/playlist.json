@@ -101,6 +101,13 @@
         "auteur": "Eagles",
         "duree": "6:30",
         "album": "Hotel California"
+      },
+      {
+        "id": 1,
+        "titre": "Bohemian Rhapsody",
+        "auteur": "Queen",
+        "duree": "5:55",
+        "album": "A Night at the Opera"
       }
     ]
   }

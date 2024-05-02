@@ -50,7 +50,7 @@ export const addTrackToPlaylist = async (req, res) => {
         playlists[playlistIndex].tracks.push(trackToAdd);
 
         // Enregistre les modifications dans le fichier
-        fs.writeFileSync(PlaylistFilePath, JSON.stringify(playlists));
+        fs.writeFileSync(PlaylistFilePath, JSON.stringify(playlists, null, 2));
 
         return res.status(200).json({ message: "Musique ajoutée à la playlist avec succès" });
     } catch (error) {
