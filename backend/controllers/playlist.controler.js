@@ -4,7 +4,7 @@ import { patchData,postData,deleteData,PlaylistFilePath } from './common.control
 export const delPlaylist = async (req, res) => {
     try {
         const idToDelete = parseInt(req.params.id);
-        const success = await deleteData(PlaylistFilePath, idToDelete);
+        const success = deleteData(PlaylistFilePath, idToDelete);
         if (success) {
             return res.status(200).json({ message: `Playlist supprimée avec succès: ${idToDelete}` });
         } else {
@@ -22,11 +22,11 @@ export const getPlaylist = async (req, res) => {
 };
 
 export const addPlaylist = async (req, res) => {
-    await postData(PlaylistFilePath, req, res, false,true);
+    postData(PlaylistFilePath, req, res, false,true);
 }
 
 export const editPlaylist = async (req, res) => {
-    await patchData(PlaylistFilePath,req,res);
+    patchData(PlaylistFilePath,req,res);
 };
 
 // Ajoute une nouvelle route pour ajouter une musique à une playlist

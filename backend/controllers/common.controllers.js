@@ -4,7 +4,9 @@ export const LikedFilePath = new URL("../Likedtrack.json", import.meta.url).path
 export const DataFilePath = new URL("../data.json", import.meta.url).pathname;
 export const PlaylistFilePath = new URL("../playlist.json", import.meta.url).pathname;
 
-export const deleteData = async (filePath, idToDelete) => {
+
+
+export const deleteData = (filePath, idToDelete) => {
     try {
         let existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
         const indexToDelete = existingData.findIndex(item => item.id === idToDelete);
@@ -23,7 +25,7 @@ export const deleteData = async (filePath, idToDelete) => {
     }
 }
 
-export const postData = async (filePath, req, res, NewIdMusique,NewIdPlaylist) => {
+export const postData = (filePath, req, res, NewIdMusique,NewIdPlaylist) => {
     console.log("Corps de la requête:", req.body);
 
     try {
@@ -57,7 +59,7 @@ export const postData = async (filePath, req, res, NewIdMusique,NewIdPlaylist) =
     }
 }
 
-export const patchData = async (filePath, req, res) => {
+export const patchData = (filePath, req, res) => {
     try {
         const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         console.log("Params de la requête:", req.params);

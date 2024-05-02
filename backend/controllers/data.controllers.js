@@ -1,14 +1,31 @@
 import fs from 'fs';
-import { deleteData, postData, patchData, DataFilePath, LikedFilePath } from './common.controllers.js';
+import { deleteData, postData, patchData, DataFilePath, LikedFilePath,PlaylistFilePath } from './common.controllers.js';
 
+function removeTrackFromPlaylists(trackId) {
+    try {
+        const playlists = JSON.parse(fs.readFileSync(PlaylistFilePath, "utf-8"));
+        
+        playlists.forEach(playlist => {
+            const index = playlist.tracks.findIndex(track => track.id === trackId);            
+            if (index !== -1) {
+                playlist.tracks.splice(index, 1);
+            }
+        });
+        fs.writeFileSync(PlaylistFilePath, JSON.stringify(playlists, null, 2));
+
+        console.log("Musique retirée de toutes les playlists avec succès.");
+    } catch (error) {
+        console.error("Erreur lors de la suppression de la musique des playlists:", error);
+    }
+}
 
 export const delData = async (req, res) => {
     try {
         const idToDelete = parseInt(req.params.id);
-        const successData = await deleteData(DataFilePath, idToDelete);
+        const successData = deleteData(DataFilePath, idToDelete);
         if (successData) {
             //si la musique est présente on essaye de la supprime des titres likées
-            await deleteData(LikedFilePath, idToDelete);
+            deleteData(LikedFilePath, idToDelete);
             return res.status(200).json({ message: `Musique supprimée avec succès: ${idToDelete}` });
         } else {
             return res.status(404).json({ message: "Aucune musique trouvée avec cet ID" });
@@ -20,7 +37,7 @@ export const delData = async (req, res) => {
 }
 
 export const setData = async (req, res) => {
-    await postData(DataFilePath, req, res, true,false);
+    postData(DataFilePath, req, res, true,false);
 }
 
 export const getData = async (req, res) => {
@@ -29,7 +46,7 @@ export const getData = async (req, res) => {
 };
 
 export const editData = async (req, res) => {
-    await patchData(DataFilePath, req, res);
+    patchData(DataFilePath, req, res);
 };
 
 
