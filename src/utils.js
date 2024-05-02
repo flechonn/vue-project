@@ -60,3 +60,4 @@ export async function patchData(url, data) {
     throw new Error('Erreur lors de l\'envoi de la requête:', error);
   }
 }
+

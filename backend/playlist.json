@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "idp": 1,
     "name": "Classic Rock",
     "description": "A collection of classic rock songs. Bangers",
     "tracks": [
@@ -42,7 +42,7 @@
     ]
   },
   {
-    "id": 2,
+    "idp": 2,
     "name": "90s Hitss",
     "description": "The best hits from the 90s.",
     "tracks": [
@@ -77,7 +77,7 @@
     ]
   },
   {
-    "id": 3,
+    "idp": 3,
     "name": "Dance",
     "description": "Playlist for dancing on the floor.",
     "tracks": [
@@ -91,7 +91,7 @@
     ]
   },
   {
-    "id": 4,
+    "idp": 4,
     "name": "techno",
     "description": "Playlist for Polytech.",
     "tracks": [

@@ -48,14 +48,16 @@ function EditMusic(){
   router.push(`/edit-musique/${id}`);
 }
 
+
+
 async function addToPlaylist() {
     try {
-        await postData(`http://localhost:4000/playlist/${selectedPlaylist.value}/add`, musique.value);
-        console.log("Musique ajoutée à la playlist avec succès !");
+      await postData(`http://localhost:4000/playlist/${selectedPlaylist.value}`,musique.value)
     } catch (error) {
         console.error(error.message);
     }
 }
+
 
 onBeforeMount(async () => {
   try {
