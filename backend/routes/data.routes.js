@@ -7,8 +7,6 @@ routerdata.get("/", getData);
 
 routerdata.post("/",setData);
 
-routerdata.delete('/:id', delData);
-
 routerdata.patch('/:id',editData);
 
 

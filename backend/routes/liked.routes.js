@@ -9,5 +9,4 @@ routerliked.post('/:id',addLiked);
 
 routerliked.delete('/:id',delLiked);
 
-
 export default routerliked;
