@@ -108,6 +108,13 @@
         "auteur": "Queen",
         "duree": "5:55",
         "album": "A Night at the Opera"
+      },
+      {
+        "id": 5,
+        "titre": "Hey Jude ",
+        "auteur": "The Beatles",
+        "duree": "7:42",
+        "album": "Hey star wars"
       }
     ]
   },
@@ -128,6 +135,13 @@
         "duree": "2:56",
         "album": "hardstyle",
         "id": 10
+      },
+      {
+        "id": 5,
+        "titre": "Hey Jude ",
+        "auteur": "The Beatles",
+        "duree": "7:42",
+        "album": "Hey star wars"
       }
     ],
     "idp": 5

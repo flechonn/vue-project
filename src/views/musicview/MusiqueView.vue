@@ -1,7 +1,7 @@
 <script setup>
 import {useRoute, useRouter} from "vue-router";
 import {onBeforeMount,onMounted,ref} from "vue";
-import { fetchData,postData,deleteData } from '../../utils.js'
+import { fetchData,postData,deleteData,patchData } from '../../utils.js'
 
 const route = useRoute();
 const router = useRouter();
@@ -52,7 +52,8 @@ function EditMusic(){
 
 async function addToPlaylist() {
     try {
-      await postData(`http://localhost:4000/playlist/${selectedPlaylist.value}`,musique.value)
+      console.log(musique.value)
+      await patchData(`http://localhost:4000/playlist/add/${selectedPlaylist.value}`,musique.value)
     } catch (error) {
         console.error(error.message);
     }
@@ -97,7 +98,7 @@ onBeforeMount(async () => {
         <div>
             <label for="playlistSelect">Ajouter à la playlist :</label>
             <select id="playlistSelect" v-model="selectedPlaylist">
-                <option v-for="playlist in playlists" :key="playlist.id" :value="playlist.id">{{ playlist.name }}</option>
+                <option v-for="playlist in playlists" :key="playlist.idp" :value="playlist.idp">{{ playlist.name }}</option>
             </select>
             <button @click="addToPlaylist">Ajouter à la playlist</button>
         </div>
