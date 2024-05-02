@@ -27,13 +27,12 @@ export const addPlaylist = async (req, res) => {
 }
 
 export const editPlaylist = async (req, res) => {
-    patchData(PlaylistFilePath,req,res);
+    patchData(PlaylistFilePath,req,res,true);
 };
 
 // Ajoute une nouvelle route pour ajouter une musique à une playlist
 export const addTrackToPlaylist = async (req, res) => {
     try {
-        console.table(req.body)
         const playlistId = parseInt(req.params.playlistId);
         console.log("playlist id :"+playlistId)
         const trackToAdd = req.body; // Assure-toi que le frontend envoie les informations de la musique à ajouter dans le corps de la requête

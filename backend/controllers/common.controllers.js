@@ -15,7 +15,6 @@ export const deleteData = (filePath, idToDelete,boolplaylist) => {
         }else{
             indexToDelete = existingData.findIndex(item => item.id === idToDelete);
         }
-        
         if (indexToDelete !== -1) {
             // Suppression de l'élément correspondant à l'ID
             existingData.splice(indexToDelete, 1);
@@ -64,11 +63,17 @@ export const postData = (filePath, req, res, NewIdMusique,NewIdPlaylist) => {
     }
 }
 
-export const patchData = (filePath, req, res) => {
+export const patchData = (filePath, req, res,boolplaylist) => {
     try {
         const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         console.log("Params de la requête:", req.params);
-        const index = data.findIndex(item => item.id === parseInt(req.params.id));
+        let idToPatch= parseInt(req.params.id)
+        let index=0
+        if(boolplaylist){
+            index = data.findIndex(item => item.idp === idToPatch);
+        }else{
+            index = data.findIndex(item => item.id === idToPatch);
+        }
         // Vérification si l'élément existe
         if (index === -1) {
             return res.status(404).json({ message: "L'élément n'a pas été trouvé." });

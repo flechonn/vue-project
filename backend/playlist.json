@@ -10,6 +10,13 @@
         "auteur": "Bob Dylan",
         "duree": "6:13",
         "album": "Highway 61 Revisited"
+      },
+      {
+        "id": 1,
+        "titre": "Bohemian Rhapsody",
+        "auteur": "Queen",
+        "duree": "5:55",
+        "album": "A Night at the Opera"
       }
     ]
   },

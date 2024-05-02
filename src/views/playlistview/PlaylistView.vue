@@ -2,7 +2,7 @@
 import {useRoute, useRouter} from "vue-router";
 import {onBeforeMount,onMounted,ref} from "vue";
 import MusiCard from '../musicview/MusiCard.vue'
-import { fetchData } from '../../utils.js'
+import { fetchData,deleteData } from '../../utils.js'
 
 
 const route = useRoute();
@@ -15,6 +15,12 @@ const laplaylist = ref(null);
 
 function EditPlaylist(){
   router.push(`/edit-playlist/${idp}`);
+}
+
+async function DelPlaylist(){
+  await deleteData(`http://localhost:4000/playlist/${idp}`);
+  console.log("playlist supprimer")
+  router.back();
 }
 
 onBeforeMount(async () => {
@@ -37,7 +43,10 @@ onBeforeMount(async () => {
       <div class="flex-container" v-if="laplaylist">
         <MusiCard v-for="track in laplaylist.tracks" :key="track.id" :musique="track"/>
       </div>
-    <button @click="EditPlaylist()">EditPlaylist</button>
+      <div>
+        <button @click="EditPlaylist()">EditPlaylist</button>
+        <button @click="DelPlaylist()">Delete Playlist </button>
+      </div>
     <button @click="router.back()">Go back</button>
 </template>
   

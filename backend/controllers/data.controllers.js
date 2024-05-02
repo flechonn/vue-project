@@ -25,7 +25,8 @@ export const delData = async (req, res) => {
         const successData = deleteData(DataFilePath, idToDelete,false);
         if (successData) {
             //si la musique est présente on essaye de la supprime des titres likées
-            deleteData(LikedFilePath, idToDelete,false);
+            deleteData(LikedFilePath, idToDelete,false); //liked
+            removeTrackFromPlaylists(idToDelete)
             return res.status(200).json({ message: `Musique supprimée avec succès: ${idToDelete}` });
         } else {
             return res.status(404).json({ message: "Aucune musique trouvée avec cet ID" });
@@ -46,7 +47,7 @@ export const getData = async (req, res) => {
 };
 
 export const editData = async (req, res) => {
-    patchData(DataFilePath, req, res);
+    patchData(DataFilePath, req, res,false);
 };
 
 
