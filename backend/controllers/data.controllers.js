@@ -20,7 +20,7 @@ export const delData = async (req, res) => {
 }
 
 export const setData = async (req, res) => {
-    await postData(DataFilePath, req, res, true);
+    await postData(DataFilePath, req, res, true,false);
 }
 
 export const getData = async (req, res) => {

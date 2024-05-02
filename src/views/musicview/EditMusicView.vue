@@ -17,7 +17,6 @@
     
     const c = data.value.find(c => c.id === parseInt(id));
     musique.value = c;
-    isLike();
   } catch (error) {
     console.error(error.message);
   }

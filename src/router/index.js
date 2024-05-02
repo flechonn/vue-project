@@ -26,7 +26,7 @@ const router = createRouter({
             component: AccountView
         },
         {
-            path: "/account/:id",
+            path: "/account/:idp",
             name: "Playlist",
             component: PlaylistView
         },
@@ -63,7 +63,7 @@ const router = createRouter({
             component: EditMusicView
         },
         {
-            path:"/edit-playlist/:id",
+            path:"/edit-playlist/:idp",
             name:"edit-playlist",
             component: EditPlaylistView
         },

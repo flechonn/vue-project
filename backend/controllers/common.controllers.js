@@ -23,18 +23,23 @@ export const deleteData = async (filePath, idToDelete) => {
     }
 }
 
-export const postData = async (filePath, req, res, generateNewId) => {
+export const postData = async (filePath, req, res, NewIdMusique,NewIdPlaylist) => {
     console.log("Corps de la requête:", req.body);
 
     try {
         const newData = req.body;
         let existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
         
-        if (generateNewId) {
+        if (NewIdMusique) {
             const lastId = existingData.length > 0 ? existingData[existingData.length - 1].id : 0;
             newData.id = lastId + 1;
         }
-        
+
+        if (NewIdPlaylist) {
+            const lastidp = existingData.length > 0 ? existingData[existingData.length - 1].idp : 0;
+            newData.idp = lastidp + 1;
+        }
+
         let indexToInsert = existingData.findIndex(item => item.id > newData.id);
         
         if (indexToInsert === -1) {

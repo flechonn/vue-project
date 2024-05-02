@@ -77,7 +77,7 @@ onBeforeMount(async () => {
 <template>
     <div class="container">
         <div class="contan" v-if="musique">
-            <h1>La musique</h1>
+          <h2>{{ musique.titre }}</h2>
             <p>Auteur :{{ musique.auteur }}</p>
             <p>Titre :{{ musique.titre }}</p>
             <p>Durée :{{ musique.duree }}</p>

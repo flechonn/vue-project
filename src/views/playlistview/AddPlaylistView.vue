@@ -7,13 +7,13 @@ import { postData } from '../../utils.js'
 const router = useRouter();
 const playlistAdded = ref(false)
 const newPlaylist = ref({
-  nom: '',
+  name: '',
   description: ''
 })
 
 async function addPlaylist() {
   try {
-    const response = await postData('http://localhost:4000/playlists/', newPlaylist.value);
+    const response = await postData('http://localhost:4000/playlist/', newPlaylist.value);
     playlistAdded.value = true;
   } catch (error) {
     console.error('Erreur lors de l\'envoi de la requête:', error);
@@ -26,7 +26,7 @@ async function addPlaylist() {
     <h2>Ajouter une nouvelle playlist</h2>
     <div>
       <label for="nom">Nom:</label>
-      <input type="text" id="nom" placeholder="Nom de la playlist" v-model="newPlaylist.nom" required>
+      <input type="text" id="name" placeholder="Nom de la playlist" v-model="newPlaylist.name" required>
     </div>
     <div>
       <label for="description">Description:</label>

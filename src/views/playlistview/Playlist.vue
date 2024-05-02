@@ -6,14 +6,14 @@ const props = defineProps({
 });
 const router = useRouter();
 
-function goToMusicDetail() {
-  router.push(`/account/${props.playlist.id}`);
+function goToPlaylistDetail() {
+  router.push(`/account/${props.playlist.idp}`);
 };
 
 </script>
 
 <template>
-    <div class="playlist" @click="goToMusicDetail">
+    <div class="playlist" @click="goToPlaylistDetail">
       <h3>{{ props.playlist.name }}</h3>
       <p>{{ props.playlist.description }}</p>
       <ul>

@@ -7,21 +7,21 @@ import { fetchData } from '../../utils.js'
 
 const route = useRoute();
 const router = useRouter();
-const {id} = route.params;
+const {idp} = route.params;
 
 const playlist =ref(null);
 const laplaylist = ref(null);
 
 
 function EditPlaylist(){
-  router.push(`/edit-playlist/${id}`);
+  router.push(`/edit-playlist/${idp}`);
 }
 
 onBeforeMount(async () => {
   try {
     playlist.value = await fetchData('http://localhost:4000/playlist/');
     
-    const c = playlist.value.find(c => c.id ===parseInt(id));
+    const c = playlist.value.find(c => c.idp ===parseInt(idp));
     laplaylist.value = c
   } catch (error) {
     console.error(error.message);

@@ -6,14 +6,14 @@ import { fetchData,patchData,deleteData } from '../../utils.js'
 
 const route = useRoute();
 const router = useRouter();
-const {id} = route.params;
+const {idp} = route.params;
 
 const playlist =ref(null);
 const laplaylist = ref(null);
 
 async function editPlaylist() {
   try {
-    const response = await patchData(`http://localhost:4000/playlist/${id}`, {
+    const response = await patchData(`http://localhost:4000/playlist/${idp}`, {
       name: laplaylist.value.name,
       description: laplaylist.value.description,
       // tracks: laplaylist.value.tracks,
@@ -27,7 +27,7 @@ async function editPlaylist() {
 onBeforeMount(async () => {
   try {
     playlist.value = await fetchData('http://localhost:4000/playlist/');
-    const c = playlist.value.find(c => c.id === parseInt(id));
+    const c = playlist.value.find(c => c.idp === parseInt(idp));
     laplaylist.value = c;
   } catch (error) {
     console.error(error.message);

@@ -22,7 +22,7 @@ export const getLiked = async (req, res) => {
 };
 
 export const addLiked = async (req, res) => {
-    await postData(LikedFilePath, req, res, false);
+    await postData(LikedFilePath, req, res, false,false);
 }
 
 

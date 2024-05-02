@@ -22,7 +22,7 @@ export const getPlaylist = async (req, res) => {
 };
 
 export const addPlaylist = async (req, res) => {
-    await postData(PlaylistFilePath, req, res, false);
+    await postData(PlaylistFilePath, req, res, false,true);
 }
 
 export const editPlaylist = async (req, res) => {
