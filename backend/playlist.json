@@ -110,5 +110,26 @@
         "album": "A Night at the Opera"
       }
     ]
+  },
+  {
+    "name": "rock",
+    "description": "rock sauter entraînement",
+    "tracks": [
+      {
+        "id": 3,
+        "titre": "Hotel Californio",
+        "auteur": "Eagles",
+        "duree": "6:30",
+        "album": "Hotel California"
+      },
+      {
+        "titre": "Joli ",
+        "auteur": " Fleur marguerite",
+        "duree": "2:56",
+        "album": "hardstyle",
+        "id": 10
+      }
+    ],
+    "idp": 5
   }
 ]
