@@ -1,0 +1,79 @@
+[
+  {
+    "idp": 1,
+    "name": "Classic Rock",
+    "description": "A collection of classic rock songs. Bangers",
+    "tracks": [
+      {
+        "id": 8,
+        "titre": "Like a Rolling Stone",
+        "auteur": "Bob Dylan",
+        "duree": "6:13",
+        "album": "Highway 61 Revisited"
+      },
+      {
+        "id": 1,
+        "titre": "Bohemian Rhapsody",
+        "auteur": "Queen",
+        "duree": "5:55",
+        "album": "A Night at the Opera"
+      }
+    ]
+  },
+  {
+    "idp": 2,
+    "name": "90s Hitss",
+    "description": "The best hits from the 90s.",
+    "tracks": [
+      {
+        "id": 1,
+        "titre": "Bohemian Rhapsody",
+        "auteur": "Queen",
+        "duree": "5:55",
+        "album": "A Night at the Opera"
+      }
+    ]
+  },
+  {
+    "idp": 3,
+    "name": "Dance",
+    "description": "Playlist for dancing on the floor.",
+    "tracks": [
+      {
+        "id": 1,
+        "titre": "Bohemian Rhapsody",
+        "auteur": "Queen",
+        "duree": "5:55",
+        "album": "A Night at the Opera"
+      }
+    ]
+  },
+  {
+    "idp": 4,
+    "name": "techno",
+    "description": "Playlist for Polytech.",
+    "tracks": [
+      {
+        "id": 4,
+        "titre": "Stairway to Heaven",
+        "auteur": "Led Zeppelin",
+        "duree": "8:02",
+        "album": "Led Zeppelin IV5"
+      },
+      {
+        "id": 9,
+        "titre": "Purple Haze",
+        "auteur": "Jimi Hendrix",
+        "duree": "2:50",
+        "album": "Are You Experienced"
+      },
+      {
+        "id": 1,
+        "titre": "Bohemian Rhapsody",
+        "auteur": "Queen",
+        "duree": "5:55",
+        "album": "A Night at the Opera"
+      }
+    ]
+  }
+]

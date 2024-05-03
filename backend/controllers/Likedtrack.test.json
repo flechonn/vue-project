@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "titre": "Bohemian Rhapsody",
+    "auteur": "Queen",
+    "duree": "5:55",
+    "album": "A Night at the Opera"
+  },
+  {
+    "id": 3,
+    "titre": "Hotel California",
+    "auteur": "Eagles",
+    "duree": "6:30",
+    "album": "Hotel California"
+  },
+  {
+    "id": 5,
+    "titre": "Hey Jude ",
+    "auteur": "The Beatles",
+    "duree": "7:11",
+    "album": "Hey Jude"
+  }
+]
