@@ -16,8 +16,15 @@ describe('deleteData function', () => {
         ];
         fs.writeFileSync(LikedFilePath, JSON.stringify(fakeData));
 
-        deleteData(LikedFilePath, 2, false);
+        let result=deleteData(LikedFilePath, 2, false);
+        expect(result).toBe(true)
+        const newData = JSON.parse(fs.readFileSync(LikedFilePath, 'utf-8'));
+        expect(newData).not.toContainEqual({ id: 2, name: 'Item 2' });
+    });
 
+    test('Should return false because its no a Playliste', () => {
+        let result=deleteData(LikedFilePath, 1, true);
+        expect(result).toBe(false)
         const newData = JSON.parse(fs.readFileSync(LikedFilePath, 'utf-8'));
         expect(newData).not.toContainEqual({ id: 2, name: 'Item 2' });
     });
