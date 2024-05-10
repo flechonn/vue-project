@@ -21,14 +21,11 @@ const router = createRouter({
             component:HomeView
         },
         {
-            path: "/account",
-            name: "account",
-            component: AccountView
-        },
-        {
-            path: "/account/:idp",
-            name: "Playlist",
-            component: PlaylistView
+            path: '/account',
+            children: [
+              { path: '', component: AccountView },
+              { path: ':idp', component: PlaylistView },
+            ], 
         },
         {
             path: "/musiques/:id",
@@ -37,13 +34,10 @@ const router = createRouter({
         },
         {
             path:"/album",
-            name:"album",
-            component: AlbumView
-        },
-        {
-            path:"/album/:album",
-            name:"singleAlbum",
-            component: SingleAlbumView
+            children: [
+                { path: '', component: AlbumView },
+                { path: ':album', component: SingleAlbumView },
+              ],  
         },
         {
             path:"/addMusic",
